@@ -173,6 +173,7 @@ static void saveDoubleAsByteArrayIntoBuffer(uint8_t *buffer, uint8_t index, doub
 	}
 }
 
+
 void MASB_COMM_S_CA_testing(MCP4725_Handle_T hdac){
 		//It only executes once:
 		uint32_t VADC = 0;

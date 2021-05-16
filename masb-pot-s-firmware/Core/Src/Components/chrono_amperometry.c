@@ -14,3 +14,4 @@ void CA_changeTimerConfiguration(TIM_HandleTypeDef *timer, long samplingPeriodMs
 
 
 }
+

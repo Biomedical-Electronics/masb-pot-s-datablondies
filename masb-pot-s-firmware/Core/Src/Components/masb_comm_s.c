@@ -1,6 +1,6 @@
 #include "components/masb_comm_s.h"
 #include "components/cobs.h"
-
+#include "main.h"
 
 static UART_HandleTypeDef *huart;
 static ADC_HandleTypeDef  *hadc;
@@ -172,7 +172,6 @@ static void saveDoubleAsByteArrayIntoBuffer(uint8_t *buffer, uint8_t index, doub
 		buffer[i + index] = doubleConverter.b[i];
 	}
 }
-
 
 void MASB_COMM_S_CA_testing(MCP4725_Handle_T hdac){
 		//It only executes once:

@@ -4,21 +4,13 @@
 
 void CA_changeTimerConfiguration(TIM_HandleTypeDef *timer, long samplingPeriodMs, uint32_t freq_timer){
 
-	uint32_t counterPeriod = 0;
-	uint32_t counterPeriodLast = 0;
-	uint32_t prescalar = 0;
+	//codigo github
+	__HAL_TIM_SET_AUTORELOAD(timer, samplingPeriodMs * 10); // Fijamos el periodo.
+	// El mutliplicar el samplingPeriodMs por 10 para fijar el periodo solo es valido
+	// si se fija una frecuencia de trabajo para el timer de 10 kHz.
 
-	//Using the timer formulas from p3:
-	//counterPeriod = samplingPeriodMs * (84e6/samplingPeriodMs);
-
-	if (counterPeriod > 65535){
-		counterPeriodLast = samplingPeriodMs*(freq_timer/samplingPeriodMs);
-		prescalar = counterPeriod/counterPeriodLast;
-		__HAL_TIM_SET_PRESCALER(timer, prescalar);
-		__HAL_TIM_SET_COUNTER(timer,counterPeriodLast);
-	}
-
-	__HAL_TIM_SET_COUNTER(timer, counterPeriod);
+	__HAL_TIM_SET_COUNTER(timer, 0); // Reiniciamos el contador del timer a 0.
+	HAL_TIM_Base_Start_IT(timer); // Iniciamos el timer.
 
 
 }

@@ -19,9 +19,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "components/stm32main.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -100,14 +101,19 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-
+  struct Handles_S myHandles;
+    myHandles.huart2 = &huart2;
+    myHandles.hadc1 = &hadc1;
+    myHandles.htim3 = &htim3;
+    myHandles.hi2c1 = &hi2c1;
+  setup(&myHandles);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+	  loop();
 
     /* USER CODE END WHILE */
 

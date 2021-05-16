@@ -7,8 +7,8 @@
 struct CA_Configuration_S {
 
 	double eDC;
-	uint32_t samplingPeriodMs;
-	uint32_t measurementTime;
+	long samplingPeriodMs;
+	long measurementTime;
 
 };
 

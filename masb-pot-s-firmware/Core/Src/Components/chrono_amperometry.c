@@ -3,7 +3,6 @@
 
 
 void CA_changeTimerConfiguration(TIM_HandleTypeDef *timer, long samplingPeriodMs, uint32_t freq_timer){
-
 	uint32_t counterPeriod = 0;
 	uint32_t counterPeriodLast = 0;
 	uint32_t prescalar = 0;

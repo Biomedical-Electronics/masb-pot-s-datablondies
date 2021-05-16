@@ -1,7 +1,18 @@
 #include "components/masb_comm_s.h"
 #include "components/cobs.h"
 
-extern UART_HandleTypeDef huart2;
+
+static UART_HandleTypeDef *huart;
+static ADC_HandleTypeDef  *hadc;
+static TIM_HandleTypeDef *timer;
+
+static _Bool dataReceived = FALSE;
+static _Bool estadoTest = FALSE;
+
+struct CV_Configuration_S cvConfiguration;
+struct CA_Configuration_S caConfiguration;
+struct Data_S data;
+
 
 uint8_t rxBuffer[UART_BUFF_SIZE] = { 0 },
 		txBuffer[UART_BUFF_SIZE] = { 0 };
@@ -11,13 +22,25 @@ uint8_t rxBufferDecoded[UART_BUFF_SIZE] = { 0 },
 
 uint8_t rxIndex = 0;
 
-_Bool dataReceived = FALSE;
 
 // Prototypes.
 static double saveByteArrayAsDoubleFromBuffer(uint8_t *buffer, uint8_t index);
 static double saveByteArrayAsLongFromBuffer(uint8_t *buffer, uint8_t index);
 static void saveLongAsByteArrayIntoBuffer(uint8_t *buffer, uint8_t index, uint32_t longVal);
 static void saveDoubleAsByteArrayIntoBuffer(uint8_t *buffer, uint8_t index, double doubleVal);
+
+// Prototypes
+void MASB_COMM_S_setUart(UART_HandleTypeDef *newHuart) {
+	huart = newHuart;
+}
+
+void MASB_COMM_S_setTimer(TIM_HandleTypeDef *newTimer){
+	timer = newTimer;
+}
+
+void MASB_COMM_S_setADC(ADC_HandleTypeDef *newADC){
+	hadc = newADC;
+}
 
 union Double_Converter {
 
@@ -37,7 +60,7 @@ void MASB_COMM_S_waitForMessage(void) {
 
 	dataReceived = FALSE;
 	rxIndex = 0;
-	HAL_UART_Receive_IT(&huart2, &rxBuffer[rxIndex], 1);
+	HAL_UART_Receive_IT(huart, &rxBuffer[rxIndex], 1);
 
 }
 
@@ -98,8 +121,8 @@ void MASB_COMM_S_sendData(struct Data_S data) {
 	txBuffer[txBufferLenght] = UART_TERM_CHAR;
 	txBufferLenght++;
 
-	while(!(huart2.gState == HAL_UART_STATE_READY));
-	HAL_UART_Transmit_IT(&huart2, txBuffer, txBufferLenght);
+	//while(!(huart2.gState == HAL_UART_STATE_READY));
+	HAL_UART_Transmit_IT(huart, txBuffer, txBufferLenght);
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
@@ -108,7 +131,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		dataReceived = TRUE;
 	} else {
 		rxIndex++;
-		HAL_UART_Receive_IT(&huart2, &rxBuffer[rxIndex], 1);
+		HAL_UART_Receive_IT(huart, &rxBuffer[rxIndex], 1);
 	}
 
 }
@@ -148,4 +171,11 @@ static void saveDoubleAsByteArrayIntoBuffer(uint8_t *buffer, uint8_t index, doub
 	for (uint8_t i = 0; i < 8 ; i++) {
 		buffer[i + index] = doubleConverter.b[i];
 	}
+}
+
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *timer) {
+
+	estadoTest = !estadoTest;
+
 }

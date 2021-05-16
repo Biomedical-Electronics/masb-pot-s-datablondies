@@ -40,5 +40,4 @@ void MASB_COMM_S_sendData(struct Data_S data);
 
 void MASB_COMM_S_CA_testing(MCP4725_Handle_T hdac);
 
-
 #endif /* INC_COMPONENTS_MASB_COMM_S_H_ */

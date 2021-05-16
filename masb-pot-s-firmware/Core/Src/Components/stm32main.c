@@ -31,6 +31,7 @@ void loop(void) {
 
  		switch(MASB_COMM_S_command()) {
  			case START_CV_MEAS:
+ 				MASB_COMM_S_CV_testing(hdac);
 				break;
 
  			case START_CA_MEAS:

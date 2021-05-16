@@ -173,6 +173,12 @@ static void saveDoubleAsByteArrayIntoBuffer(uint8_t *buffer, uint8_t index, doub
 	}
 }
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *timer) {
+
+	estadoTest = !estadoTest;
+
+}
+
 void MASB_COMM_S_CA_testing(MCP4725_Handle_T hdac){
 		//It only executes once:
 		uint32_t VADC = 0;
@@ -217,10 +223,3 @@ void MASB_COMM_S_CA_testing(MCP4725_Handle_T hdac){
 		HAL_GPIO_WritePin(RELAY_GPIO_Port, RELAY_Pin, GPIO_PIN_RESET);
 }
 
-
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *timer) {
-
-	estadoTest = !estadoTest;
-
-}

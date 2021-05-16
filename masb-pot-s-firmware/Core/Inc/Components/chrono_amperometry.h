@@ -11,7 +11,6 @@ struct CA_Configuration_S {
 };
 
 
-void CA_changeTimerConfiguration(TIM_HandleTypeDef *timer, long samplingPeriodMs);
-
+void CA_changeTimerConfiguration(TIM_HandleTypeDef *timer, long samplingPeriodMs, uint32_t freq_timer);
 
 #endif /* INC_COMPONENTS_CHRONO_AMPEROMETRY_H_ */

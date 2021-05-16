@@ -19,11 +19,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "components/stm32main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "components/stm32main.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -114,9 +113,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
 	  loop();
-
 
     /* USER CODE END WHILE */
 

@@ -11,4 +11,5 @@ struct CA_Configuration_S {
 };
 
 
+
 #endif /* INC_COMPONENTS_CHRONO_AMPEROMETRY_H_ */

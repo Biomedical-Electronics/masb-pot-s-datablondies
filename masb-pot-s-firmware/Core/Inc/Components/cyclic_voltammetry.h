@@ -5,6 +5,8 @@
 #include "components/cobs.h"
 #include "components/mcp4725_driver.h"
 #include "components/masb_comm_s.h"
+#include "main.h"
+#include "components/stm32main.h"
 
 struct CV_Configuration_S {
 	double eBegin;
@@ -19,7 +21,8 @@ void CA_changeTimerConfiguration(TIM_HandleTypeDef *timer, long samplingPeriodMs
 void MASB_COMM_S_CV_testing(MCP4725_Handle_T hdac);
 void MASB_COMM_S_CV_auxiliar(
 		double Vcellr,
-		struct CV_Configuration_S config,
+		double eStep,
+		double scanRate,
 		struct Data_S data,
 		uint32_t point
 		);

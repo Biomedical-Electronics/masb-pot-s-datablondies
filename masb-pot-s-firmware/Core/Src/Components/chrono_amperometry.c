@@ -2,7 +2,7 @@
 
 
 
-void CA_changeTimerConfiguration(TIM_HandleTypeDef *timer, long samplingPeriodMs){
+void CA_changeTimerConfiguration(TIM_HandleTypeDef *timer, long samplingPeriodMs, uint32_t freq_timer){
 
 	//codigo github
 	__HAL_TIM_SET_AUTORELOAD(timer, samplingPeriodMs * 10); // Fijamos el periodo.

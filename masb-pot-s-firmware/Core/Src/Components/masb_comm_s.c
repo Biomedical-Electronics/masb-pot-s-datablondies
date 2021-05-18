@@ -175,7 +175,7 @@ static void saveDoubleAsByteArrayIntoBuffer(uint8_t *buffer, uint8_t index, doub
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *timer) {
 
-	estadoTest = !estadoTest;
+	estadoTest = TRUE;
 
 }
 

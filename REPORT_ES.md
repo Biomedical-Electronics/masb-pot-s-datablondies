@@ -1,6 +1,6 @@
 # Proyecto: Potenciostato
 
-En el presente documento se detalla la programación de un potenciostato portable para poder realizar dos tipos de mediciones electroquímicas: voltommetría cíclica y cronoamperometría. 
+En el presente documento se detalla la programación de un potenciostato portable para poder realizar dos tipos de mediciones electroquímicas: voltammetría cíclica y cronoamperometría. 
 
 ## Contenidos
 

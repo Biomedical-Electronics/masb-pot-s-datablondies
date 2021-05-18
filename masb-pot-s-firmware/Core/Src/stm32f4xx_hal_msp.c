@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * File Name          : stm32f4xx_hal_msp.c
-  * Description        : This file provides code for the MSP Initialization
-  *                      and de-Initialization codes.
+  * @file         stm32f4xx_hal_msp.c
+  * @brief        This file provides code for the MSP Initialization
+  *               and de-Initialization codes.
   ******************************************************************************
   * @attention
   *
@@ -162,7 +162,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     PB8     ------> I2C1_SCL
     PB9     ------> I2C1_SDA
     */
-    GPIO_InitStruct.Pin = SCK_Pin|SDA_Pin;
+    GPIO_InitStruct.Pin = SCL_Pin|SDA_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -198,7 +198,7 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
     PB8     ------> I2C1_SCL
     PB9     ------> I2C1_SDA
     */
-    HAL_GPIO_DeInit(SCK_GPIO_Port, SCK_Pin);
+    HAL_GPIO_DeInit(SCL_GPIO_Port, SCL_Pin);
 
     HAL_GPIO_DeInit(SDA_GPIO_Port, SDA_Pin);
 
@@ -260,15 +260,15 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
 }
 
 /**
-* @brief USART MSP Initialization
+* @brief UART MSP Initialization
 * This function configures the hardware resources used in this example
-* @param husart: USART handle pointer
+* @param huart: UART handle pointer
 * @retval None
 */
-void HAL_USART_MspInit(USART_HandleTypeDef* husart)
+void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if(husart->Instance==USART2)
+  if(huart->Instance==USART2)
   {
   /* USER CODE BEGIN USART2_MspInit 0 */
 
@@ -280,21 +280,13 @@ void HAL_USART_MspInit(USART_HandleTypeDef* husart)
     /**USART2 GPIO Configuration
     PA2     ------> USART2_TX
     PA3     ------> USART2_RX
-    PA4     ------> USART2_CK
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_4;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-    GPIO_InitStruct.Pin = USART_RX_Pin;
+    GPIO_InitStruct.Pin = USART_TX_Pin|USART_RX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
-    HAL_GPIO_Init(USART_RX_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* USART2 interrupt Init */
     HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
@@ -307,14 +299,14 @@ void HAL_USART_MspInit(USART_HandleTypeDef* husart)
 }
 
 /**
-* @brief USART MSP De-Initialization
+* @brief UART MSP De-Initialization
 * This function freeze the hardware resources used in this example
-* @param husart: USART handle pointer
+* @param huart: UART handle pointer
 * @retval None
 */
-void HAL_USART_MspDeInit(USART_HandleTypeDef* husart)
+void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 {
-  if(husart->Instance==USART2)
+  if(huart->Instance==USART2)
   {
   /* USER CODE BEGIN USART2_MspDeInit 0 */
 
@@ -325,9 +317,8 @@ void HAL_USART_MspDeInit(USART_HandleTypeDef* husart)
     /**USART2 GPIO Configuration
     PA2     ------> USART2_TX
     PA3     ------> USART2_RX
-    PA4     ------> USART2_CK
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|USART_RX_Pin|GPIO_PIN_4);
+    HAL_GPIO_DeInit(GPIOA, USART_TX_Pin|USART_RX_Pin);
 
     /* USART2 interrupt DeInit */
     HAL_NVIC_DisableIRQ(USART2_IRQn);

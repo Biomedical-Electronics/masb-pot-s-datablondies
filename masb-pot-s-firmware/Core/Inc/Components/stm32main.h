@@ -5,6 +5,7 @@
 #include "components/masb_comm_s.h" //Crono + Volta + HAL + COBS + DAC
 #include "components/ad5280_driver.h"
 #include "components/i2c_lib.h"
+#include "main.h"
 
 struct Handles_S {
 	UART_HandleTypeDef *huart2; //UART_HandleTypeDef *huart;

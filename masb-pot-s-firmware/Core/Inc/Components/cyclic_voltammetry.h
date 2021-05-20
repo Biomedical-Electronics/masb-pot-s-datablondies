@@ -1,12 +1,13 @@
 #ifndef INC_COMPONENTS_CYCLIC_VOLTAMMETRY_H_
 #define INC_COMPONENTS_CYCLIC_VOLTAMMETRY_H_
 
+#define TRUE	1
+#define FALSE	0
+
 #include "stm32f4xx_hal.h"
-#include "components/cobs.h"
-#include "components/mcp4725_driver.h"
 #include "components/masb_comm_s.h"
+#include "components/mcp4725_driver.h"
 #include "main.h"
-#include "components/stm32main.h"
 
 struct CV_Configuration_S {
 	double eBegin;
@@ -17,14 +18,12 @@ struct CV_Configuration_S {
 	double eStep;
 };
 
-void CA_changeTimerConfiguration(TIM_HandleTypeDef *timer, long samplingPeriodMs, uint32_t freq_timer);
-void MASB_COMM_S_CV_testing(MCP4725_Handle_T hdac);
-void MASB_COMM_S_CV_auxiliar(
-		double Vcellr,
-		double eStep,
-		double scanRate,
-		struct Data_S data,
-		uint32_t point
-		);
+//Prototypes
+
+void CV_setUart(UART_HandleTypeDef *newHuart);
+void CV_setTimer(TIM_HandleTypeDef *newTimer);
+void CV_setADC(ADC_HandleTypeDef *newADC);
+void CV_testing(MCP4725_Handle_T hdac);
+
 
 #endif /* INC_COMPONENTS_CYCLIC_VOLTAMMETRY_H_ */

@@ -37,6 +37,8 @@ void loop(void) {
 
  		switch(MASB_COMM_S_command()) {
  			case START_CV_MEAS:
+ 				CV_firstMeasure(hdac);
+ 				CV_testing(hdac);
 
  			case START_CA_MEAS:
  				CA_firstSample(hdac);

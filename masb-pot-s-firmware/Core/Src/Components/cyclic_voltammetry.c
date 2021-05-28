@@ -15,7 +15,6 @@ static uint32_t VADC = 0;
 static double Vcell_real = 0;
 static uint32_t Vtia = 0;
 static double Icell = 0;
-static double roundedVcell = 0;
 
 //Testing
 static float VDAC = 0;
@@ -170,4 +169,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 	}
 	HAL_TIM_Base_Stop_IT(timer);
 	HAL_GPIO_WritePin(RELAY_GPIO_Port, RELAY_Pin, GPIO_PIN_RESET);
+
+
+	counter = 0;
+	point = 0;
 }

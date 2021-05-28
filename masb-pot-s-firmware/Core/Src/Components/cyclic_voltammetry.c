@@ -15,6 +15,7 @@ static uint32_t VADC = 0;
 static double Vcell_real = 0;
 static uint32_t Vtia = 0;
 static double Icell = 0;
+static double roundedVcell = 0;
 
 //Testing
 static float VDAC = 0;
@@ -73,6 +74,10 @@ void CV_firstMeasure(MCP4725_Handle_T hdac){
 	data.timeMs = samplingPeriod*point;
 	data.voltage = Vcell_real;
 	data.current = Icell;
+	/*	//descomentar per fer proba
+	 * data.voltage = Vcell;
+	 * data.current = Vcell / 10e3;
+	 */
 	MASB_COMM_S_sendData(data);
 
 }
@@ -104,37 +109,13 @@ void CV_testing(MCP4725_Handle_T hdac){
 					data.timeMs = samplingPeriod*point;
 					data.voltage = Vcell_real;
 					data.current = Icell;
+					/*	//descomentar per fer proba
+					 * data.voltage = Vcell;
+					 * data.current = Vcell / 10e3;
+					 */
 					MASB_COMM_S_sendData(data);
 
 				}
-
-				//-----------------------------------------------------------------------------------
-
-				else if (Vcell == VObjetivo){
-
-					if (VObjetivo == cvConfiguration.eVertex1){
-
-						VObjetivo = cvConfiguration.eVertex2;
-						Vcell = Vcell - cvConfiguration.eStep;
-					}
-
-					else if (VObjetivo == cvConfiguration.eVertex2){
-
-						VObjetivo = cvConfiguration.eBegin;
-						Vcell = Vcell + cvConfiguration.eStep;
-
-					}
-					else {
-						if (counter == cvConfiguration.cycles){
-							estadoCycle = FALSE;
-						}
-						counter = counter + 1;
-						VObjetivo = cvConfiguration.eVertex1;
-						Vcell = Vcell + cvConfiguration.eStep;
-					}
-				}
-
-				//-------------------------------------------------------------------------------------
 
 				else {
 
@@ -143,24 +124,43 @@ void CV_testing(MCP4725_Handle_T hdac){
 					if (VObjetivo == cvConfiguration.eVertex2){
 
 						if ((Vcell - cvConfiguration.eStep) <= VObjetivo){
-							Vcell = VObjetivo;
+							Vcell = VObjetivo + cvConfiguration.eStep;
 							VDAC = 1.65 - (VObjetivo/2);
 							MCP4725_SetOutputVoltage(hdac, VDAC);
+							VObjetivo = cvConfiguration.eBegin;
 						}
 						else{
 							Vcell = Vcell - cvConfiguration.eStep;
 						}
 					}
 
-					else {
+					else if (VObjetivo == cvConfiguration.eVertex1) {
 
 						if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
-							Vcell = VObjetivo;
+							Vcell = VObjetivo - cvConfiguration.eStep;
 							VDAC = 1.65 - (VObjetivo/2);
 							MCP4725_SetOutputVoltage(hdac, VDAC);
+							VObjetivo = cvConfiguration.eVertex2;
 						}
 						else{
 							Vcell = Vcell + cvConfiguration.eStep;
+						}
+					}
+					else {
+						if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
+							Vcell = VObjetivo - cvConfiguration.eStep;
+							VDAC = 1.65 - (VObjetivo/2);
+							MCP4725_SetOutputVoltage(hdac, VDAC);
+							VObjetivo = cvConfiguration.eVertex1;
+							if (counter == cvConfiguration.cycles){
+								estadoCycle = FALSE;
+							}
+							counter = counter + 1;
+
+						}
+						else{
+							Vcell = Vcell + cvConfiguration.eStep;
+
 						}
 					}
 			}

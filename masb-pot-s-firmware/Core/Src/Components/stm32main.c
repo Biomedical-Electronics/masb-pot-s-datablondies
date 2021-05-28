@@ -6,7 +6,9 @@ MCP4725_Handle_T hdac = NULL;
 
 void setup(struct Handles_S *handles) {
 
-	MASB_COMM_S_setUart(handles->huart2);
+	HAL_GPIO_WritePin(EN_GPIO_Port, EN_Pin, GPIO_PIN_SET); //habilitar PMU
+	MASB_COMM_S_setUart(handles->huart2); 
+
 	MASB_COMM_S_setTimer(handles->htim3);
 	MASB_COMM_S_setADC(handles->hadc1);
 	CA_setUart(handles->huart2);

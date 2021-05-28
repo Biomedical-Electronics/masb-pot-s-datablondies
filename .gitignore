@@ -16,3 +16,6 @@ Drivers/
 
 # VSC
 .vscode/
+
+#Ignored files:
+.metadata/

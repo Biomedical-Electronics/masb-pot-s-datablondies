@@ -171,3 +171,4 @@ static void saveDoubleAsByteArrayIntoBuffer(uint8_t *buffer, uint8_t index, doub
 		buffer[i + index] = doubleConverter.b[i];
 	}
 }
+

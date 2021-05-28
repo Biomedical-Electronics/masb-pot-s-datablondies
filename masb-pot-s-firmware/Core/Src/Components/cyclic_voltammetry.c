@@ -71,10 +71,8 @@ void CV_firstMeasure(MCP4725_Handle_T hdac){
 
 	data.point = point;
 	data.timeMs = samplingPeriod*point;
-	//					data.voltage = Vcell_real;
-						data.voltage = Vcell;
-	//					data.current = Icell;
-						data.current = Vcell / 10e3;
+	data.voltage = Vcell_real;
+	data.current = Icell;
 	MASB_COMM_S_sendData(data);
 
 }
@@ -104,10 +102,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 
 					data.point = point;
 					data.timeMs = samplingPeriod*point;
-//					data.voltage = Vcell_real;
-					data.voltage = Vcell;
-//					data.current = Icell;
-					data.current = Vcell / 10e3;
+					data.voltage = Vcell_real;
+					data.current = Icell;
 					MASB_COMM_S_sendData(data);
 
 				}

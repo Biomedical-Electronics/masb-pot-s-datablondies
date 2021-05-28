@@ -27,10 +27,6 @@ void CA_setADC(ADC_HandleTypeDef *newADC){
 }
 
 
-//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *timer) {
-	//estadoTest = TRUE;
-//}
-
 void CA_firstSample(MCP4725_Handle_T hdac){
 
 	caConfiguration = MASB_COMM_S_getCaConfiguration();
@@ -78,8 +74,6 @@ void CA_firstSample(MCP4725_Handle_T hdac){
 }
 
 void CA_testing(MCP4725_Handle_T hdac){
-
-		//TIM_clearEstadoTest();
 
 		while (counter <= measurementTimeMs) {
 			if (TIM_isPeriodElapsed()){

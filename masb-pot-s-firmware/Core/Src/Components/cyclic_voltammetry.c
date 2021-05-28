@@ -1,10 +1,10 @@
 #include "components/cyclic_voltammetry.h"
+#include "components/timer.h"
 
 static UART_HandleTypeDef *huart;
 static ADC_HandleTypeDef *hadc;
 static TIM_HandleTypeDef *timer;
 
-static _Bool estadoTest = FALSE;
 static _Bool estadoEnviar = FALSE;
 static _Bool estadoCycle = TRUE;
 static struct Data_S data;
@@ -37,9 +37,6 @@ void CV_setADC(ADC_HandleTypeDef *newADC){
 	hadc = newADC;
 }
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *timer) {
-	estadoTest = TRUE;
-}
 
 
 void CV_firstMeasure(MCP4725_Handle_T hdac){
@@ -47,6 +44,7 @@ void CV_firstMeasure(MCP4725_Handle_T hdac){
 	cvConfiguration = MASB_COMM_S_getCvConfiguration();
 
 	samplingPeriod = (cvConfiguration.eStep/cvConfiguration.scanRate)*1000;
+	TIM_clearEstadoTest();
 	__HAL_TIM_SET_AUTORELOAD(timer, samplingPeriod);
 	__HAL_TIM_SET_COUNTER(timer, 0);
 	HAL_TIM_Base_Start_IT(timer);
@@ -73,8 +71,10 @@ void CV_firstMeasure(MCP4725_Handle_T hdac){
 
 	data.point = point;
 	data.timeMs = samplingPeriod*point;
-	data.voltage = Vcell_real;
-	data.current = Icell;
+	//					data.voltage = Vcell_real;
+						data.voltage = Vcell;
+	//					data.current = Icell;
+						data.current = Vcell / 10e3;
 	MASB_COMM_S_sendData(data);
 
 }
@@ -83,9 +83,9 @@ void CV_testing(MCP4725_Handle_T hdac){
 
 		while ((counter < cvConfiguration.cycles) & (estadoCycle)){
 
-			if (estadoTest){
+			if (TIM_isPeriodElapsed()){
 
-				estadoTest = FALSE;
+				TIM_clearEstadoTest();
 
 				if (estadoEnviar){
 
@@ -104,8 +104,10 @@ void CV_testing(MCP4725_Handle_T hdac){
 
 					data.point = point;
 					data.timeMs = samplingPeriod*point;
-					data.voltage = Vcell_real;
-					data.current = Icell;
+//					data.voltage = Vcell_real;
+					data.voltage = Vcell;
+//					data.current = Icell;
+					data.current = Vcell / 10e3;
 					MASB_COMM_S_sendData(data);
 
 				}

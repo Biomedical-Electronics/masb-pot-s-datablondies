@@ -1,11 +1,10 @@
 #include "components/chrono_amperometry.h"
+#include "components/timer.h"
 
 static UART_HandleTypeDef *huart;
 static ADC_HandleTypeDef *hadc;
 static TIM_HandleTypeDef *timer;
 
-static _Bool estadoTest = FALSE;
-static struct Data_S data;
 static struct CA_Configuration_S caConfiguration;
 static uint32_t measurementTimeMs = 0;
 static uint32_t VADC = 0;
@@ -35,7 +34,7 @@ void CA_setADC(ADC_HandleTypeDef *newADC){
 void CA_firstSample(MCP4725_Handle_T hdac){
 
 	caConfiguration = MASB_COMM_S_getCaConfiguration();
-
+	TIM_clearEstadoTest();
 	__HAL_TIM_SET_AUTORELOAD(timer, caConfiguration.samplingPeriodMs * 10);
 	__HAL_TIM_SET_COUNTER(timer, 0);
 
@@ -49,7 +48,6 @@ void CA_firstSample(MCP4725_Handle_T hdac){
 
 	measurementTimeMs = caConfiguration.measurementTime*1000;
 
-	estadoTest = FALSE;
 
 	HAL_ADC_Start(hadc);
     HAL_ADC_PollForConversion(hadc, 200);
@@ -59,6 +57,11 @@ void CA_firstSample(MCP4725_Handle_T hdac){
     HAL_ADC_PollForConversion(hadc, 200);
     Vtia = HAL_ADC_GetValue(hadc);
     Icell = ((Vtia - 1.65)*2)/12e3;
+
+	point =  1;
+	counter = 0;
+
+	struct Data_S data;
 
     data.point = point;
     data.timeMs = counter;
@@ -71,14 +74,17 @@ void CA_firstSample(MCP4725_Handle_T hdac){
 
     point = point + 1;
 
+    TIM_clearEstadoTest();
 }
 
 void CA_testing(MCP4725_Handle_T hdac){
 
+		//TIM_clearEstadoTest();
+
 		while (counter <= measurementTimeMs) {
-			if (estadoTest){
-				estadoTest = FALSE;
-			    HAL_ADC_Start(hadc);
+			if (TIM_isPeriodElapsed()){
+				TIM_clearEstadoTest();
+				HAL_ADC_Start(hadc);
 			    HAL_ADC_PollForConversion(hadc, 200);
 			    VADC = HAL_ADC_GetValue(hadc);
 			    Vcell = (1.65 - VADC)*2;
@@ -86,8 +92,10 @@ void CA_testing(MCP4725_Handle_T hdac){
 			    HAL_ADC_PollForConversion(hadc, 200);
 			    Vtia = HAL_ADC_GetValue(hadc);
 			    Icell = ((Vtia - 1.65)*2)/12e3;
+				struct Data_S data;
 			    data.point = point;
 			    data.timeMs = counter;
+
 			    data.voltage = Vcell;
 			    data.current = Icell;
 			    MASB_COMM_S_sendData(data);

@@ -6,9 +6,15 @@ MCP4725_Handle_T hdac = NULL;
 
 void setup(struct Handles_S *handles) {
 
-	MASB_COMM_S_setUart(handles->huart2); //!!!!!!!!!!!!!!!!
+	MASB_COMM_S_setUart(handles->huart2);
 	MASB_COMM_S_setTimer(handles->htim3);
 	MASB_COMM_S_setADC(handles->hadc1);
+	CA_setUart(handles->huart2);
+	CA_setTimer(handles->htim3);
+	CA_setADC(handles->hadc1);
+	CV_setUart(handles->huart2);
+	CV_setTimer(handles->htim3);
+	CV_setADC(handles->hadc1);
 	I2C_Init(handles->hi2c1);
 
 	hpot = AD5280_Init();
@@ -31,10 +37,10 @@ void loop(void) {
 
  		switch(MASB_COMM_S_command()) {
  			case START_CV_MEAS:
-				break;
 
  			case START_CA_MEAS:
- 				MASB_COMM_S_CA_testing(hdac);
+ 				CA_firstSample(hdac);
+ 				CA_testing(hdac);
  				break;
 
 			case STOP_MEAS:

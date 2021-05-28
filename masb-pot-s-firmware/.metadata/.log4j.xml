@@ -3,7 +3,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
     <appender name="DEBUGFILE" class="org.apache.log4j.RollingFileAppender">
         <param name="Append" value="true"/>
-        <param name="File" value="C:/Users/etseib/Desktop/masb-workspace/masb-pot-s-datablondies/masb-pot-s-firmware/.metadata/.ide.log"/>
+        <param name="File" value="D:/Enginyeria Biomedica/4rt CURS/2n semestre/Microcontroladors/masb-pot-s-datablondies/.metadata/.ide.log"/>
         <param name="MaxBackupIndex" value="1"/>
         <param name="MaxFileSize" value="50MB"/>
         <param name="Threshold" value="INFO"/>

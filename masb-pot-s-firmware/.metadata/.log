@@ -52,3 +52,63 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY com.st.stm32cube.ide.mcu.ide 4 4 2021-05-17 09:29:52.544
 !MESSAGE com.st.stm32cube.ide.mcu.ide/META-INF/version/build_ref file not found, build reference will not be reported into properties
+!SESSION 2021-05-28 09:52:56.216 -----------------------------------------------
+eclipse.buildId=Version 1.5.1
+java.version=1.8.0_272
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2021-05-28 09:53:14.065
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2021-05-28 09:53:14.130
+!MESSAGE Log4j initialized with config file C:\Users\campo\Desktop\masb-workspace\masb-proyecto\masb-pot-s-datablondies\masb-pot-s-firmware\.metadata\.log4j.xml
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-05-28 09:53:16.368
+!MESSAGE Removing PartDescriptorImpl with the "com.st.stm32cube.ide.mcu.threadx.threads" id and the "ThreadX Thread List" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-05-28 09:53:16.368
+!MESSAGE Removing PartDescriptorImpl with the "com.st.stm32cube.ide.mcu.threadx.semaphores" id and the "ThreadX Semaphores" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-05-28 09:53:16.369
+!MESSAGE Removing PartDescriptorImpl with the "com.st.stm32cube.ide.mcu.threadx.mutexes" id and the "ThreadX Mutexes" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-05-28 09:53:16.369
+!MESSAGE Removing PartDescriptorImpl with the "com.st.stm32cube.ide.mcu.threadx.queues" id and the "ThreadX Message Queues" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-05-28 09:53:16.370
+!MESSAGE Removing PartDescriptorImpl with the "com.st.stm32cube.ide.mcu.threadx.eventflags" id and the "ThreadX Event Flags" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-05-28 09:53:16.371
+!MESSAGE Removing PartDescriptorImpl with the "com.st.stm32cube.ide.mcu.threadx.timer" id and the "ThreadX Timers" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-05-28 09:53:16.371
+!MESSAGE Removing PartDescriptorImpl with the "com.st.stm32cube.ide.mcu.threadx.blockpools" id and the "ThreadX Memory Block Pools" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-05-28 09:53:16.372
+!MESSAGE Removing PartDescriptorImpl with the "com.st.stm32cube.ide.mcu.threadx.bytepools" id and the "ThreadX Memory Byte Pools" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2021-05-28 09:53:21.217
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 4 4 2021-05-28 09:53:22.014
+!MESSAGE com.st.stm32cube.ide.mcu.ide/META-INF/version/build_ref file not found, build reference will not be reported into properties
+!SESSION 2021-05-28 09:54:26.982 -----------------------------------------------
+eclipse.buildId=Version 1.5.1
+java.version=1.8.0_272
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2021-05-28 09:54:42.650
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2021-05-28 09:54:42.728
+!MESSAGE Log4j initialized with config file C:\Users\campo\Desktop\masb-workspace\masb-proyecto\masb-pot-s-datablondies\masb-pot-s-firmware\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2021-05-28 09:54:49.252
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 4 4 2021-05-28 09:54:50.049
+!MESSAGE com.st.stm32cube.ide.mcu.ide/META-INF/version/build_ref file not found, build reference will not be reported into properties

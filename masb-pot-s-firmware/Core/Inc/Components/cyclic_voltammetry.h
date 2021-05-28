@@ -24,6 +24,7 @@ void CV_setUart(UART_HandleTypeDef *newHuart);
 void CV_setTimer(TIM_HandleTypeDef *newTimer);
 void CV_setADC(ADC_HandleTypeDef *newADC);
 void CV_testing(MCP4725_Handle_T hdac);
+void CV_firstMeasure(MCP4725_Handle_T hdac);
 
 
 #endif /* INC_COMPONENTS_CYCLIC_VOLTAMMETRY_H_ */

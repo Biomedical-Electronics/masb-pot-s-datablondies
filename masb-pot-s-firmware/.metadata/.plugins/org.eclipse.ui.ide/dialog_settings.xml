@@ -19,6 +19,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\campo\Desktop\masb-workspace\masb-proyecto\masb-pot-s-datablondies\masb-pot-s-firmware"/>
 			<item value="C:\Users\etseib\Desktop\masb-workspace\masb-pot-s-datablondies\masb-pot-s-firmware"/>
 		</list>
 	</section>

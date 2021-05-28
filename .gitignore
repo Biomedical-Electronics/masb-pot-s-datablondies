@@ -1,4 +1,3 @@
-
 # Project stuff
 .cproject
 .mxproject
@@ -17,5 +16,3 @@ Drivers/
 # VSC
 .vscode/
 
-#Ignored files:
-.metadata/

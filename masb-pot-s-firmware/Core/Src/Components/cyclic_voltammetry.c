@@ -114,6 +114,10 @@ void CV_testing(MCP4725_Handle_T hdac){
 					 */
 					MASB_COMM_S_sendData(data);
 
+					if (point == 1+(cvConfiguration.cycles*2*(cvConfiguration.eVertex1 - cvConfiguration.eVertex2))/cvConfiguration.eStep){
+						estadoCycle = FALSE;
+					}
+
 				}
 
 				else {
@@ -151,9 +155,9 @@ void CV_testing(MCP4725_Handle_T hdac){
 							VDAC = 1.65 - (VObjetivo/2);
 							MCP4725_SetOutputVoltage(hdac, VDAC);
 							VObjetivo = cvConfiguration.eVertex1;
-							if (counter == cvConfiguration.cycles){
-								estadoCycle = FALSE;
-							}
+							//if (counter == cvConfiguration.cycles){
+							//	estadoCycle = FALSE;
+							//}
 							counter = counter + 1;
 
 						}

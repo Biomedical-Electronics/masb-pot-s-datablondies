@@ -73,6 +73,10 @@ void CV_firstMeasure(MCP4725_Handle_T hdac){
 	data.timeMs = samplingPeriod*point;
 	data.voltage = Vcell_real;
 	data.current = Icell;
+	/*	//descomentar per fer proba
+	 * data.voltage = Vcell;
+	 * data.current = Vcell / 10e3;
+	 */
 	MASB_COMM_S_sendData(data);
 
 }
@@ -104,37 +108,17 @@ void CV_testing(MCP4725_Handle_T hdac){
 					data.timeMs = samplingPeriod*point;
 					data.voltage = Vcell_real;
 					data.current = Icell;
+					/*	//descomentar per fer proba
+					 * data.voltage = Vcell;
+					 * data.current = Vcell / 10e3;
+					 */
 					MASB_COMM_S_sendData(data);
 
+					if (point == 1+(cvConfiguration.cycles*2*(cvConfiguration.eVertex1 - cvConfiguration.eVertex2))/cvConfiguration.eStep){
+						estadoCycle = FALSE;
+					}
+
 				}
-
-				//-----------------------------------------------------------------------------------
-
-				else if (Vcell == VObjetivo){
-
-					if (VObjetivo == cvConfiguration.eVertex1){
-
-						VObjetivo = cvConfiguration.eVertex2;
-						Vcell = Vcell - cvConfiguration.eStep;
-					}
-
-					else if (VObjetivo == cvConfiguration.eVertex2){
-
-						VObjetivo = cvConfiguration.eBegin;
-						Vcell = Vcell + cvConfiguration.eStep;
-
-					}
-					else {
-						if (counter == cvConfiguration.cycles){
-							estadoCycle = FALSE;
-						}
-						counter = counter + 1;
-						VObjetivo = cvConfiguration.eVertex1;
-						Vcell = Vcell + cvConfiguration.eStep;
-					}
-				}
-
-				//-------------------------------------------------------------------------------------
 
 				else {
 
@@ -143,24 +127,43 @@ void CV_testing(MCP4725_Handle_T hdac){
 					if (VObjetivo == cvConfiguration.eVertex2){
 
 						if ((Vcell - cvConfiguration.eStep) <= VObjetivo){
-							Vcell = VObjetivo;
+							Vcell = VObjetivo + cvConfiguration.eStep;
 							VDAC = 1.65 - (VObjetivo/2);
 							MCP4725_SetOutputVoltage(hdac, VDAC);
+							VObjetivo = cvConfiguration.eBegin;
 						}
 						else{
 							Vcell = Vcell - cvConfiguration.eStep;
 						}
 					}
 
-					else {
+					else if (VObjetivo == cvConfiguration.eVertex1) {
 
 						if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
-							Vcell = VObjetivo;
+							Vcell = VObjetivo - cvConfiguration.eStep;
 							VDAC = 1.65 - (VObjetivo/2);
 							MCP4725_SetOutputVoltage(hdac, VDAC);
+							VObjetivo = cvConfiguration.eVertex2;
 						}
 						else{
 							Vcell = Vcell + cvConfiguration.eStep;
+						}
+					}
+					else {
+						if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
+							Vcell = VObjetivo - cvConfiguration.eStep;
+							VDAC = 1.65 - (VObjetivo/2);
+							MCP4725_SetOutputVoltage(hdac, VDAC);
+							VObjetivo = cvConfiguration.eVertex1;
+							//if (counter == cvConfiguration.cycles){
+							//	estadoCycle = FALSE;
+							//}
+							counter = counter + 1;
+
+						}
+						else{
+							Vcell = Vcell + cvConfiguration.eStep;
+
 						}
 					}
 			}
@@ -170,4 +173,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 	}
 	HAL_TIM_Base_Stop_IT(timer);
 	HAL_GPIO_WritePin(RELAY_GPIO_Port, RELAY_Pin, GPIO_PIN_RESET);
+
+
+	counter = 0;
+	point = 0;
 }

@@ -41,6 +41,7 @@ void loop(void) {
  			case START_CV_MEAS:
  				CV_firstMeasure(hdac);
  				CV_testing(hdac);
+ 				break;
 
  			case START_CA_MEAS:
  				CA_firstSample(hdac);

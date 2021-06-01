@@ -20,8 +20,10 @@ struct CA_Configuration_S {
 void CA_setUart(UART_HandleTypeDef *newHuart);
 void CA_setTimer(TIM_HandleTypeDef *newTimer);
 void CA_setADC(ADC_HandleTypeDef *newADC);
+void CA_settingConfiguration(void);
 void CA_testing(MCP4725_Handle_T hdac);
 void CA_firstSample(MCP4725_Handle_T hdac);
-
+_Bool is_counter(void);
+void true_counter(MCP4725_Handle_T hdac);
 
 #endif /* INC_COMPONENTS_CHRONO_AMPEROMETRY_H_ */

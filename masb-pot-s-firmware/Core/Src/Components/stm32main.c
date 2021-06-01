@@ -2,21 +2,27 @@
 
 AD5280_Handle_T hpot = NULL;
 MCP4725_Handle_T hdac = NULL;
+static _Bool estadoCA = FALSE;
+static _Bool estadoCV = FALSE;
+static _Bool estadoIDLE = FALSE;
+static _Bool primeraCA = TRUE;
+static _Bool primeraCV = TRUE;
 
 
 void setup(struct Handles_S *handles) {
 
-	HAL_GPIO_WritePin(EN_GPIO_Port, EN_Pin, GPIO_PIN_SET); //habilitar PMU
-	MASB_COMM_S_setUart(handles->huart2); 
-
+	MASB_COMM_S_setUart(handles->huart2);
 	MASB_COMM_S_setTimer(handles->htim3);
 	MASB_COMM_S_setADC(handles->hadc1);
+
 	CA_setUart(handles->huart2);
 	CA_setTimer(handles->htim3);
 	CA_setADC(handles->hadc1);
+
 	CV_setUart(handles->huart2);
 	CV_setTimer(handles->htim3);
 	CV_setADC(handles->hadc1);
+
 	I2C_Init(handles->hi2c1);
 
 	hpot = AD5280_Init();
@@ -35,32 +41,75 @@ void setup(struct Handles_S *handles) {
 }
 
 void loop(void) {
+
     if (MASB_COMM_S_dataReceived()) {
 
  		switch(MASB_COMM_S_command()) {
+
  			case START_CV_MEAS:
- 				CV_firstMeasure(hdac);
- 				CV_testing(hdac);
+ 				CV_settingConfiguration();
+ 				estadoCV = TRUE;
+ 				estadoIDLE = FALSE;
  				break;
 
  			case START_CA_MEAS:
- 				CA_firstSample(hdac);
- 				CA_testing(hdac);
+ 				CA_settingConfiguration();
+ 				estadoCA = TRUE;
+ 				estadoIDLE = FALSE;
  				break;
 
 			case STOP_MEAS:
+				estadoIDLE = TRUE;
+
  				break;
 
  			default:
  				break;
-
  		}
 
  		MASB_COMM_S_waitForMessage();
-
  	}
 
- 	// Aqui es donde deberia de ir el codigo de control de las mediciones si se quiere implementar
-   // el comando de STOP.
-
+    else{
+    	//si no recibo instruccion
+    	if (estadoIDLE){ //estado = IDLE por lo tanto STOP
+    		estadoIDLE = FALSE;
+    		true_estadoCycle(hdac); //STOP -> abrir rele + parar timer
+    		true_counter(hdac);
+    		primeraCV = TRUE; //nueva variable para llamar primera medicion
+    		estadoCV = FALSE; //queremos que despues del STOP la siguiente medida se haga con START
+			estadoCA = FALSE;
+			primeraCA = TRUE;
+    	} else { //estado != IDLE
+			if (estadoCV){ //estado = CV
+				if(primeraCV){ //primera medida CV
+					CV_firstMeasure(hdac);
+					primeraCV = FALSE; //variable primera medida FALSE
+				} else {
+					if (is_estadoCycle()){ //if para controlar cada medida/punto/sample
+						CV_testing(hdac); //funcion para obtener y enviar punto
+					} else { //hemos completado la medida
+						true_estadoCycle(hdac); //abrir rele + parar timer
+						estadoCV = FALSE;
+						primeraCV = TRUE;
+					}
+				}
+			}
+			//lo mismo pero para la CA
+			else if (estadoCA){
+				if(primeraCA){
+					CA_firstSample(hdac);
+					primeraCA = FALSE;
+				}else{
+					if (is_counter()){ //if para seguir con la medicion
+						CA_testing(hdac);
+					} else { //en este entra si acabamos la medicion, no si la paramos
+						true_counter(hdac); //abrir rele + parar timer
+						estadoCA = FALSE;
+						primeraCA = TRUE;
+					}
+				}
+			}
+    	}
+    }
 }

@@ -11,6 +11,10 @@ static _Bool primeraCV = TRUE;
 
 void setup(struct Handles_S *handles) {
 
+	HAL_GPIO_WritePin(EN_GPIO_Port, EN_Pin, GPIO_PIN_SET);
+
+	HAL_Delay(500);
+
 	MASB_COMM_S_setUart(handles->huart2);
 	MASB_COMM_S_setTimer(handles->htim3);
 	MASB_COMM_S_setADC(handles->hadc1);
@@ -29,7 +33,7 @@ void setup(struct Handles_S *handles) {
 	AD5280_ConfigSlaveAddress(hpot, 0x2C);
 	AD5280_ConfigNominalResistorValue(hpot, 50e3f);
 	AD5280_ConfigWriteFunction(hpot, I2C_Write); // MIRAR I2C!!
-	AD5280_SetWBResistance(hpot, 10e3f); //10kohms!!
+	AD5280_SetWBResistance(hpot, 50e3f); //definir macro resistencia tia
 
 	hdac = MCP4725_Init();
 	MCP4725_ConfigSlaveAddress(hdac, 0x66);

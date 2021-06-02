@@ -60,10 +60,10 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define B1_Pin GPIO_PIN_13
 #define B1_GPIO_Port GPIOC
-#define VREF_Pin GPIO_PIN_0
-#define VREF_GPIO_Port GPIOA
-#define ICELL_Pin GPIO_PIN_1
+#define ICELL_Pin GPIO_PIN_0
 #define ICELL_GPIO_Port GPIOA
+#define VREF_Pin GPIO_PIN_1
+#define VREF_GPIO_Port GPIOA
 #define USART_TX_Pin GPIO_PIN_2
 #define USART_TX_GPIO_Port GPIOA
 #define USART_RX_Pin GPIO_PIN_3

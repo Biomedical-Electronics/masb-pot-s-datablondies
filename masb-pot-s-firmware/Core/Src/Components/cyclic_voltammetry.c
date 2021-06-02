@@ -56,8 +56,8 @@ void CV_firstMeasure(MCP4725_Handle_T hdac){
 	__HAL_TIM_SET_COUNTER(timer, 0);
 	HAL_TIM_Base_Start_IT(timer);
 
-	VDAC = 1.65 - (cvConfiguration.eBegin/2);
-	MCP4725_SetOutputVoltage(hdac, VDAC);
+	float outputVoltage = cvConfiguration.eBegin / 2.0 + 2.0;
+	MCP4725_SetOutputVoltage(hdac, outputVoltage);
 
 	VObjetivo = cvConfiguration.eVertex1;
 
@@ -155,8 +155,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 
 					if ((Vcell - cvConfiguration.eStep) <= VObjetivo){
 						Vcell = VObjetivo + cvConfiguration.eStep;
-						VDAC = 1.65 - (VObjetivo/2);
-						MCP4725_SetOutputVoltage(hdac, VDAC);
+						float outputVoltage =  Vcell / 2.0 + 2.0;
+						MCP4725_SetOutputVoltage(hdac, outputVoltage);
 
 						VObjetivo = Vertexmid;
 					}
@@ -168,8 +168,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 
 					if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
 						Vcell = VObjetivo - cvConfiguration.eStep;
-						VDAC = 1.65 - (VObjetivo/2);
-						MCP4725_SetOutputVoltage(hdac, VDAC);
+						float outputVoltage = Vcell / 2.0 + 2.0;
+						MCP4725_SetOutputVoltage(hdac, outputVoltage);
 						VObjetivo = Vertexmid2;
 					}
 					else{
@@ -180,8 +180,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 					if (cvConfiguration.eVertex1 > cvConfiguration.eVertex2){
 						if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
 							Vcell = VObjetivo - cvConfiguration.eStep;
-							VDAC = 1.65 - (VObjetivo/2);
-							MCP4725_SetOutputVoltage(hdac, VDAC);
+							float outputVoltage = Vcell / 2.0 + 2.0;
+							MCP4725_SetOutputVoltage(hdac, outputVoltage);
 							VObjetivo = cvConfiguration.eVertex1;
 						}
 						else{
@@ -192,7 +192,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 						if ((Vcell - cvConfiguration.eStep) <= VObjetivo){
 							Vcell = VObjetivo + cvConfiguration.eStep;
 							VDAC = 1.65 - (VObjetivo/2);
-							MCP4725_SetOutputVoltage(hdac, VDAC);
+							float outputVoltage = Vcell / 2.0 + 2.0;
+							MCP4725_SetOutputVoltage(hdac, outputVoltage);
 							VObjetivo = cvConfiguration.eVertex2;
 						}
 						else{

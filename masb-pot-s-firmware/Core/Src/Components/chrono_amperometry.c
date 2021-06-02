@@ -13,6 +13,8 @@ static uint32_t Vtia = 0;
 static double Icell = 0;
 volatile static uint32_t counter = 0;
 static uint32_t point = 1;
+const double u2b_m = 8.0/3.3;
+const double u2b_b = 4.0;
 
 void CA_setUart(UART_HandleTypeDef *newHuart) {
 	huart = newHuart;
@@ -37,25 +39,27 @@ void CA_firstSample(MCP4725_Handle_T hdac){
 	__HAL_TIM_SET_AUTORELOAD(timer, caConfiguration.samplingPeriodMs * 10);
 	__HAL_TIM_SET_COUNTER(timer, 0);
 
-	float VDAC = 1.65 - (caConfiguration.eDC/2);
-
-	MCP4725_SetOutputVoltage(hdac, VDAC);
-
-	HAL_GPIO_WritePin(RELAY_GPIO_Port, RELAY_Pin, GPIO_PIN_SET);
+	float outputVoltage = caConfiguration.eDC / 2.0 + 2.0;
+	MCP4725_SetOutputVoltage(hdac, outputVoltage);
 
 	HAL_TIM_Base_Start_IT(timer);
 
 	measurementTimeMs = caConfiguration.measurementTime*1000;
 
+	HAL_GPIO_WritePin(RELAY_GPIO_Port, RELAY_Pin, GPIO_PIN_SET);
+
 
 	HAL_ADC_Start(hadc);
     HAL_ADC_PollForConversion(hadc, 200);
     VADC = HAL_ADC_GetValue(hadc);
-    Vcell = (1.65 - VADC)*2;
+    double adcVoltage = ((double) VADC) / 4095.0 * 3.3;
+    Vcell = -((adcVoltage*u2b_m)-u2b_b);
+
     HAL_ADC_Start(hadc);
     HAL_ADC_PollForConversion(hadc, 200);
     Vtia = HAL_ADC_GetValue(hadc);
-    Icell = ((Vtia - 1.65)*2)/12e3;
+    adcVoltage = ((double) Vtia) / 4095.0 * 3.3;
+    Icell = ((adcVoltage*u2b_m)-u2b_b)/50e3f;
 
 	point =  1;
 	counter = 0;
@@ -80,14 +84,19 @@ void CA_testing(MCP4725_Handle_T hdac){
 
 		if (TIM_isPeriodElapsed()){
 			TIM_clearEstadoTest();
+
 			HAL_ADC_Start(hadc);
-			HAL_ADC_PollForConversion(hadc, 200);
-			VADC = HAL_ADC_GetValue(hadc);
-			Vcell = (1.65 - VADC)*2;
-			HAL_ADC_Start(hadc);
-			HAL_ADC_PollForConversion(hadc, 200);
-			Vtia = HAL_ADC_GetValue(hadc);
-			Icell = ((Vtia - 1.65)*2)/12e3;
+		    HAL_ADC_PollForConversion(hadc, 200);
+		    VADC = HAL_ADC_GetValue(hadc);
+		    double adcVoltage = ((double) VADC) / 4095.0 * 3.3;
+		    Vcell = -((adcVoltage*u2b_m)-u2b_b);
+
+		    HAL_ADC_Start(hadc);
+		    HAL_ADC_PollForConversion(hadc, 200);
+		    Vtia = HAL_ADC_GetValue(hadc);
+		    adcVoltage = ((double) Vtia) / 4095.0 * 3.3;
+		    Icell = ((adcVoltage*u2b_m)-u2b_b)/50e3f;
+
 			struct Data_S data;
 			data.point = point;
 			data.timeMs = counter;

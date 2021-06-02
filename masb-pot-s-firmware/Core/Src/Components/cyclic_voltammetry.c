@@ -23,7 +23,11 @@ static double Vcell = 0;
 static double VObjetivo = 0;
 static double samplingPeriod = 0;
 static uint32_t point = 0;
-
+static uint32_t difVertex = 0;
+static double Vertexup = 0;
+static double Vertexlow = 0;
+static double Vertexmid = 0;
+static double Vertexmid2 = 0;
 
 void CV_setUart(UART_HandleTypeDef *newHuart) {
 	huart = newHuart;
@@ -73,14 +77,30 @@ void CV_firstMeasure(MCP4725_Handle_T hdac){
 	Icell = ((Vtia - 1.65)*2)/12e3;
 	point = 0;
 
+	if (cvConfiguration.eVertex1 > cvConfiguration.eVertex2){
+		difVertex = cvConfiguration.eVertex1 - cvConfiguration.eVertex2;
+		Vertexlow = cvConfiguration.eVertex2;
+		Vertexup = cvConfiguration.eVertex1;
+		Vertexmid = cvConfiguration.eBegin;
+		Vertexmid2 = cvConfiguration.eVertex2;
+	} else { //consideramos que vertex1 es menor que vertex2
+		difVertex = cvConfiguration.eVertex2 - cvConfiguration.eVertex1;
+		Vertexlow = cvConfiguration.eVertex1;
+		Vertexup = cvConfiguration.eVertex2;
+		Vertexmid = cvConfiguration.eVertex2;
+		Vertexmid2 = cvConfiguration.eVertex1;
+	}
+
 	data.point = point;
 	data.timeMs = samplingPeriod*point;
 	data.voltage = Vcell_real;
 	data.current = Icell;
-	/*	//descomentar per fer proba
+	//descomentar per fer proba
+	/*
 	 * data.voltage = Vcell;
 	 * data.current = Vcell / 10e3;
 	 */
+
 	MASB_COMM_S_sendData(data);
 
 }
@@ -112,13 +132,16 @@ void CV_testing(MCP4725_Handle_T hdac){
 				data.timeMs = samplingPeriod*point;
 				data.voltage = Vcell_real;
 				data.current = Icell;
-				/*	//descomentar per fer proba
+
+				//descomentar per fer proba
+				/*
 				 * data.voltage = Vcell;
 				 * data.current = Vcell / 10e3;
 				 */
+
 				MASB_COMM_S_sendData(data);
 
-				if (point == 1+(cvConfiguration.cycles*2*(cvConfiguration.eVertex1 - cvConfiguration.eVertex2))/cvConfiguration.eStep){
+				if (point == 1+(cvConfiguration.cycles*2*(difVertex))/cvConfiguration.eStep){
 					estadoCycle = FALSE;
 				}
 
@@ -128,46 +151,54 @@ void CV_testing(MCP4725_Handle_T hdac){
 
 				estadoEnviar = TRUE;
 
-				if (VObjetivo == cvConfiguration.eVertex2){
+				if (VObjetivo == Vertexlow){
 
 					if ((Vcell - cvConfiguration.eStep) <= VObjetivo){
 						Vcell = VObjetivo + cvConfiguration.eStep;
 						VDAC = 1.65 - (VObjetivo/2);
 						MCP4725_SetOutputVoltage(hdac, VDAC);
-						VObjetivo = cvConfiguration.eBegin;
+
+						VObjetivo = Vertexmid;
 					}
 					else{
 						Vcell = Vcell - cvConfiguration.eStep;
 					}
 				}
-
-				else if (VObjetivo == cvConfiguration.eVertex1) {
+				else if (VObjetivo == Vertexup) {
 
 					if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
 						Vcell = VObjetivo - cvConfiguration.eStep;
 						VDAC = 1.65 - (VObjetivo/2);
 						MCP4725_SetOutputVoltage(hdac, VDAC);
-						VObjetivo = cvConfiguration.eVertex2;
+						VObjetivo = Vertexmid2;
 					}
 					else{
 						Vcell = Vcell + cvConfiguration.eStep;
 					}
 				}
 				else {
-					if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
-						Vcell = VObjetivo - cvConfiguration.eStep;
-						VDAC = 1.65 - (VObjetivo/2);
-						MCP4725_SetOutputVoltage(hdac, VDAC);
-						VObjetivo = cvConfiguration.eVertex1;
-						//if (counter == cvConfiguration.cycles){
-						//	estadoCycle = FALSE;
-						//}
-						//counter = counter + 1;
+					if (cvConfiguration.eVertex1 > cvConfiguration.eVertex2){
+						if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
+							Vcell = VObjetivo - cvConfiguration.eStep;
+							VDAC = 1.65 - (VObjetivo/2);
+							MCP4725_SetOutputVoltage(hdac, VDAC);
+							VObjetivo = cvConfiguration.eVertex1;
+						}
+						else{
+							Vcell = Vcell + cvConfiguration.eStep;
 
-					}
-					else{
-						Vcell = Vcell + cvConfiguration.eStep;
+						}
+					} else {
+						if ((Vcell - cvConfiguration.eStep) <= VObjetivo){
+							Vcell = VObjetivo + cvConfiguration.eStep;
+							VDAC = 1.65 - (VObjetivo/2);
+							MCP4725_SetOutputVoltage(hdac, VDAC);
+							VObjetivo = cvConfiguration.eVertex2;
+						}
+						else{
+							Vcell = Vcell - cvConfiguration.eStep;
 
+						}
 					}
 				}
 		}

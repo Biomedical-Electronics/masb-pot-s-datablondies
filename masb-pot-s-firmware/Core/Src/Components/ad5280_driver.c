@@ -38,8 +38,10 @@ void AD5280_ConfigNominalResistorValue(AD5280_Handle_T self,
 void AD5280_SetWBResistance(AD5280_Handle_T self,
         float wbResistorValue) {
 
-    self->dataByte = ((uint8_t)(wbResistorValue * 256.0 - 60.0) /
+    self->dataByte = (uint8_t)((wbResistorValue * 256.0 - 60.0) /
         self->nominalResistorValue);
+
+    self->instructionByte = 0b00011000;
 
     uint8_t data[2] = { self->instructionByte, self->dataByte };
 

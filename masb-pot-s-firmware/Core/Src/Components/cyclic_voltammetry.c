@@ -76,6 +76,7 @@ void CV_firstMeasure(MCP4725_Handle_T hdac){
 	Vtia = HAL_ADC_GetValue(hadc);
 	Icell = ((Vtia - 1.65)*2)/12e3;
 	point = 0;
+
 	if (cvConfiguration.eVertex1 > cvConfiguration.eVertex2){
 		difVertex = cvConfiguration.eVertex1 - cvConfiguration.eVertex2;
 		Vertexlow = cvConfiguration.eVertex2;
@@ -131,6 +132,7 @@ void CV_testing(MCP4725_Handle_T hdac){
 				data.timeMs = samplingPeriod*point;
 				data.voltage = Vcell_real;
 				data.current = Icell;
+
 				//descomentar per fer proba
 				/*
 				 * data.voltage = Vcell;
@@ -155,13 +157,13 @@ void CV_testing(MCP4725_Handle_T hdac){
 						Vcell = VObjetivo + cvConfiguration.eStep;
 						VDAC = 1.65 - (VObjetivo/2);
 						MCP4725_SetOutputVoltage(hdac, VDAC);
+
 						VObjetivo = Vertexmid;
 					}
 					else{
 						Vcell = Vcell - cvConfiguration.eStep;
 					}
 				}
-
 				else if (VObjetivo == Vertexup) {
 
 					if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
@@ -198,7 +200,6 @@ void CV_testing(MCP4725_Handle_T hdac){
 
 						}
 					}
-
 				}
 		}
 

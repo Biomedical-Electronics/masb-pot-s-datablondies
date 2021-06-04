@@ -164,8 +164,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 
 					if ((Vcell - cvConfiguration.eStep) <= VObjetivo){
 						Vcell = VObjetivo + cvConfiguration.eStep;
-						float outputVoltage =  Vcell / 2.0 + 2.0;
-						MCP4725_SetOutputVoltage(hdac, outputVoltage);
+						//float outputVoltage =  Vcell / 2.0 + 2.0;
+						//MCP4725_SetOutputVoltage(hdac, outputVoltage);
 
 						VObjetivo = Vertexmid;
 					}
@@ -177,8 +177,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 
 					if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
 						Vcell = VObjetivo - cvConfiguration.eStep;
-						float outputVoltage = Vcell / 2.0 + 2.0;
-						MCP4725_SetOutputVoltage(hdac, outputVoltage);
+						//float outputVoltage =  Vcell / 2.0 + 2.0;
+						//MCP4725_SetOutputVoltage(hdac, outputVoltage);
 						VObjetivo = Vertexmid2;
 					}
 					else{
@@ -189,8 +189,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 					if (cvConfiguration.eVertex1 > cvConfiguration.eVertex2){
 						if ((Vcell + cvConfiguration.eStep) >= VObjetivo){
 							Vcell = VObjetivo - cvConfiguration.eStep;
-							float outputVoltage = Vcell / 2.0 + 2.0;
-							MCP4725_SetOutputVoltage(hdac, outputVoltage);
+							//float outputVoltage =  Vcell / 2.0 + 2.0;
+							//MCP4725_SetOutputVoltage(hdac, outputVoltage);
 							VObjetivo = cvConfiguration.eVertex1;
 						}
 						else{
@@ -201,8 +201,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 						if ((Vcell - cvConfiguration.eStep) <= VObjetivo){
 							Vcell = VObjetivo + cvConfiguration.eStep;
 							VDAC = 1.65 - (VObjetivo/2);
-							float outputVoltage = Vcell / 2.0 + 2.0;
-							MCP4725_SetOutputVoltage(hdac, outputVoltage);
+							//float outputVoltage =  Vcell / 2.0 + 2.0;
+							//MCP4725_SetOutputVoltage(hdac, outputVoltage);
 							VObjetivo = cvConfiguration.eVertex2;
 						}
 						else{
@@ -214,7 +214,8 @@ void CV_testing(MCP4725_Handle_T hdac){
 		}
 
 		//---------------------------------------------------------------------------------------------
-
+		float outputVoltage =  Vcell / 2.0 + 2.0;
+		MCP4725_SetOutputVoltage(hdac, outputVoltage);
 	}
 }
 _Bool is_estadoCycle(void) { //nueva funcion

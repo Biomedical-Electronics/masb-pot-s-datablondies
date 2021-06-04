@@ -13,8 +13,10 @@ static uint32_t Vtia = 0;
 static double Icell = 0;
 volatile static uint32_t counter = 0;
 static uint32_t point = 1;
-const double u2b_m = 8.0/3.3;
-const double u2b_b = 4.0;
+
+//Conversions:
+static double u2b_m = 8.0/3.3;
+static double u2b_b = 4.0;
 
 void CA_setUart(UART_HandleTypeDef *newHuart) {
 	huart = newHuart;

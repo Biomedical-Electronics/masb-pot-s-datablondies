@@ -29,6 +29,10 @@ static double Vertexlow = 0;
 static double Vertexmid = 0;
 static double Vertexmid2 = 0;
 
+//Conversions:
+static double u2b_m = 8.0/3.3;
+static double u2b_b = 4.0;
+
 void CV_setUart(UART_HandleTypeDef *newHuart) {
 	huart = newHuart;
 }
@@ -69,12 +73,15 @@ void CV_firstMeasure(MCP4725_Handle_T hdac){
 	HAL_ADC_Start(hadc);
 	HAL_ADC_PollForConversion(hadc, 200);
 	VADC = HAL_ADC_GetValue(hadc);
-	Vcell_real = (1.65 - VADC)*2;
+	double adcVoltage = ((double) VADC) / 4095.0 * 3.3;
+	Vcell_real = -((adcVoltage*u2b_m)-u2b_b);
 
 	HAL_ADC_Start(hadc);
 	HAL_ADC_PollForConversion(hadc, 200);
 	Vtia = HAL_ADC_GetValue(hadc);
-	Icell = ((Vtia - 1.65)*2)/12e3;
+	adcVoltage = ((double) Vtia) / 4095.0 * 3.3;
+	Icell = ((adcVoltage*u2b_m)-u2b_b)/50e3f; //((adcVoltage - 1.65)*2)/12e3;
+
 	point = 0;
 
 	if (cvConfiguration.eVertex1 > cvConfiguration.eVertex2){
@@ -121,12 +128,14 @@ void CV_testing(MCP4725_Handle_T hdac){
 				HAL_ADC_Start(hadc);
 				HAL_ADC_PollForConversion(hadc, 200);
 				VADC = HAL_ADC_GetValue(hadc);
-				Vcell_real = (1.65 - VADC)*2;
+				double adcVoltage = ((double) VADC) / 4095.0 * 3.3;
+				Vcell_real =  -((adcVoltage*u2b_m)-u2b_b); //(1.65 - VADC)*2;
 
 				HAL_ADC_Start(hadc);
 				HAL_ADC_PollForConversion(hadc, 200);
 				Vtia = HAL_ADC_GetValue(hadc);
-				Icell = ((Vtia - 1.65)*2)/12e3;
+				adcVoltage = ((double) Vtia) / 4095.0 * 3.3;
+				Icell = ((adcVoltage*u2b_m)-u2b_b)/50e3f; //((Vtia - 1.65)*2)/12e3;
 
 				data.point = point;
 				data.timeMs = samplingPeriod*point;

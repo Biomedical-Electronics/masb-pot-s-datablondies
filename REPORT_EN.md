@@ -135,6 +135,59 @@ The digital outputs are configured as follows:
 
 And making use of the _HAL_ libraries we control them.
 
+## Code-Operative
+
+The following diagrams show the operations of the cyclic voltammetry, chronoamperometry and main script of the stm32:
+
+- CA_firstMeasure function of the chronoamperometry:
+
+<p align="center">
+<a href="Docs/assets/CA_firstMeasure_english.png">
+<img src="Docs/assets/CA_firstMeasure_english.png" alt="Función CA_firstMeasure de la cronoamperometría" width="200"/>
+</a>
+</p>
+
+
+- CA_testing function of the chronoamperometry:
+
+<p align="center">
+<a href="Docs/assets/CA_testing_english.png">
+<img src="Docs/assets/CA_testing_english.png" alt="Función CA_testing de la cronoamperometría" width="400"/>
+</a>
+</p>
+
+- CV_firstMeasure function of the voltammetry:
+
+<p align="center">
+<a href="Docs/assets/CV_firstMeasure_english.png">
+<img src="Docs/assets/CV_firstMeasure_english.png" alt="Función CV_firstMeasure de la voltametría" width="800"/>
+</a>
+</p>
+
+- CV_testing function of the voltammetry:
+
+<p align="center">
+<a href="Docs/assets/CV_testing_english.png">
+<img src="Docs/assets/CV_testing_english.png" alt="Función CV_testing de la voltametría" width="1100"/>
+</a>
+</p>
+
+- setup function from stm32.main script:
+
+<p align="center">
+<a href="Docs/assets/setup_ingles.png">
+<img src="Docs/assets/setup_ingles.png" alt="Función setup del archivo stm32.main" width="300"/>
+</a>
+</p>
+
+- Loop function of the stm32.main script:
+
+<p align="center">
+<a href="Docs/assets/loop_english.png">
+<img src="Docs/assets/loop_english.png" alt="Función loop del archivo stm32.main" width="1100"/>
+</a>
+</p>
+
 ## Results
 
 Two tests have been carried out in different sessions. In the first, the system was tested with the following diode configuration:

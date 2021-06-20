@@ -10,8 +10,8 @@ En el presente documento se detalla la programación de un potenciostato portabl
 - [Resultados](#resultados)
     - [Voltammetría Cíclica de Díodos](#voltammetría-cíclica-de-díodos)
     - [Cronoamperometría de Díodos](#cronoamperometría-de-díodos)   
-    - [Voltammetría Cíclica de Díodos](#voltammetría-cíclica-prueba-electroquímica)
-    - [Cronoamperometría de Díodos](#cronoamperometría-prueba-electroquímica)   
+    - [Voltammetría Cíclica de un compuesto](#voltammetría-cíclica-prueba-electroquímica)
+    - [Cronoamperometría de un compuesto](#cronoamperometría-prueba-electroquímica)   
 - [Conclusiones](#conclusiones)
 
 ## Introducción
@@ -22,8 +22,8 @@ Este componente es fundamental para aquellos **estudios electroquímicos** con s
 
 Una de estas medidas electroquímicas es la **Voltammetria Cíclica** (CV), un tipo de medición potenciodinámica, es decir, dónde se aplica un potencial variable a una celda electroquímica. Por otro lado, se mide la corriente que esta celda proporciona y se representa frente al voltaje aplicado. El potencial se mide entre el electrodo de trabajo y el electrodo de referencia, mientras que la corriente se mide entre el electrodo de trabajo y el auxiliar. El potencial del electrodo aumenta linealmente en **función del tiempo** en las **fases cíclicas** hasta que alcanza un valor y cambia de dirección. Este mecanismo se denomina **barrido triangular** de potencial y se puede ver representado en la siguiente figura [1](Docs/assets/imgs/triangular-excitation-CV.png). La tasa de cambio de voltaje a lo largo del tiempo durante cada una de estas fases se conoce como **velocidad de exploración** (V/s).
 <p align="center">
-<a href="Docs/assets/imgs/triangular-excitation-CV.png">
-<img src="Docs/assets/imgs/triangular-excitation-CV.png" alt="Señal triangular de excitación de la CV." />
+<a href="Docs/assets/triangular-excitation-CV.png">
+<img src="Docs/assets/triangular-excitation-CV.png" alt="Señal triangular de excitación de la CV." width="400"/>
 </a>
 </p>
 
@@ -33,8 +33,8 @@ Con tal de entender el proyecto, se darán cuatro pinceladas de los compomentes 
 
 El _Front-end_ se encarga de estabilizar la diferencia de voltaje entre los electrodos de la celda electroquímica y leer/procesar la señal de salida. El voltage de regulación (V<sub>LDO</sub>) alimenta los componentes analógicos del _Front-end_. Tal y como vemos en el circuito, el primer amplificador es un Op-Amp que se usa como control. Este proporciona al sensor el V<sub>IN</sub>, ajustado con un divisor de tensión (R1 y R2). También nos encontramos con un amplificador búfer. Este lo utilizamos para aislar. El V<sub>OCV</sub> es controlado por el ADC del microcontrolador y aplicado a CE (en la celda) como referencia. En el momento de tomar la muestra el relé (Switch) se cierra. Y el TIA (amplificador de transimpedancia) genera la señal de salida, através de la R<sub>TIA</sub>, que es proporcional a la corriente en la celda[1]. 
 <p align="center">
-<a href="Docs/assets/imgs/front_end.png">
-<img src="Docs/assets/imgs/front_end.png" alt="Block diagram del _e-Reader_." />
+<a href="Docs/assets/front_end.png">
+<img src="Docs/assets/front_end.png" alt="Block diagram del _e-Reader_." />
 </a>
 </p>
 
@@ -56,8 +56,8 @@ El _Front-end_ se encarga de estabilizar la diferencia de voltaje entre los elec
 Para cada funcionalidad descrita se ha configurado una herramiento del microcontrolador:
 - **USART**: permite recibir/enviar datos a través de los puertos habilitados.
 <p align="center">
-<a href="Docs/assets/imgs/USART.png">
-<img src="Docs/assets/imgs/USART.png" alt="Configuración de la USART." />
+<a href="Docs/assets/USART.png">
+<img src="Docs/assets/USART.png" alt="Configuración de la USART." width = "800"/>
 </a>
 </p>
 
@@ -65,8 +65,8 @@ Seleccionamos _modo asíncrono_ en el campo `Mode` y en la parte inferior selecc
 
 - **I2C**: protocolo de transmisión de información. 
 <p align="center">
-<a href="Docs/assets/imgs/I2C.png">
-<img src="Docs/assets/imgs/I2C.png" alt="Configuración de I2C." />
+<a href="Docs/assets/I2C.png">
+<img src="Docs/assets/I2C.png" alt="Configuración de I2C." width = "800"/>
 </a>
 </p>
 
@@ -74,8 +74,8 @@ Asignaremos a PB8 y PB9 las funciones I2C_SCL (Serial Clock) y I2C_SDA (Serial D
 
 - **TIMERS**: relojes que generan interrupciones cada ciertas unidades de tiempo.
 <p align="center">
-<a href="Docs/assets/imgs/TIMERS.png">
-<img src="Docs/assets/imgs/TIMERS.png" alt="Configuración de timer 3." />
+<a href="Docs/assets/TIMERS.png">
+<img src="Docs/assets/TIMERS.png" alt="Configuración de timer 3." width = "800"/>
 </a>
 </p>
 
@@ -88,8 +88,8 @@ En otra sección, veremos como configuramos el _timer_ para cada prueba electroq
 - **ADC y GPIO**: pines programables de entrada/salida. Las entradas son analógicas y las salidas digitales. 
 
 <p align="center">
-<a href="Docs/assets/imgs/analog_input.png">
-<img src="Docs/assets/imgs/analog_input.png" alt="Entradas analógicas." />
+<a href="Docs/assets/analog_input.png">
+<img src="Docs/assets/analog_input.png" alt="Entradas analógicas." width = "800"/>
 </a>
 </p>
 
@@ -98,8 +98,8 @@ Para las entradas analógicas utilizamos el ADC. Analog-to-Digital Converter es 
 Las salidas digitales se configuran así: 
 
 <p align="center">
-<a href="Docs/assets/imgs/GPIO_output.png">
-<img src="Docs/assets/imgs/GPIO_output.png" alt="Salidas digitales." />
+<a href="Docs/assets/GPIO_output.png">
+<img src="Docs/assets/GPIO_output.png" alt="Salidas digitales." width = "600"/>
 </a>
 </p>
 
@@ -111,8 +111,8 @@ Y haciendo uso de las librerías _HAL_ las controlamos.
 En total se han realizado dos pruebas en diferentes sesiones. En la primera, se ha testeado el sistema con la siguiente configuración de díodos:
 
 <p align="center">
-<a href="Docs/assets/imgs/circuit_diode.png">
-<img src="Docs/assets/imgs/circuit_diode.png" alt="Connexionado de la celda para el primer testing: Díodos." />
+<a href="Docs/assets/circuit_diode.png">
+<img src="Docs/assets/circuit_diode.png" alt="Connexionado de la celda para el primer testing: Díodos." width = "500"/>
 </a>
 </p>
 
@@ -120,64 +120,93 @@ En total se han realizado dos pruebas en diferentes sesiones. En la primera, se 
 ### Voltammetría Cíclica de Díodos
 Los valores introducidos por el usuario se leen en la siguiente tabla:
 
-Variable| Value 
--------------------- | -------------
-eBegin |0.25 V
-eVertex1 | 0.5 V
-eVertex2 |  -0.5 V
-cycles  |2
-scanRate  |0.01 V/s
-eStep |0.005 V
+|Variable| Value 
+|:--------------------: |:-------------: 
+|eBegin |0.25 V
+|eVertex1 | 0.5 V
+|eVertex2 |  -0.5 V
+|cycles  |2
+|scanRate  |0.01 V/s
+|eStep |0.005 V
 
-<p align="center">
-<a href="Docs/assets/imgs/diode_CV_1.png">
-<img src="Docs/assets/imgs/diode_CV_1.png" alt="Voltammetría Cíclica con vértice 1 mayor a vértice 2." />
-</a>
-</p>
 
-<p align="center">
-<a href="Docs/assets/imgs/diode_CV_2.png">
-<img src="Docs/assets/imgs/diode_CV_2.png" alt="Voltammetría Cíclica con vértice 2 mayor a vértice 1." />
+<a href="Docs/assets/diode_CV_1.png">
+<img src="Docs/assets/diode_CV_1.png" alt="Voltammetría Cíclica con vértice 1 mayor a vértice 2." />
 </a>
-</p>
+
+
+<a href="Docs/assets/diode_CV_2.png">
+<img src="Docs/assets/diode_CV_2.png" alt="Voltammetría Cíclica con vértice 2 mayor a vértice 1." />
+</a>
+
 
 ### Cronoamperometría de Díodos
 
 Los valores introducidos por el usuario se leen en la siguiente tabla:
 
-Variable| Value 
--------------------- | -------------
-eDC |0.3 V
-samplingPeriodMs | 10 ms
-measurementTime | 120 s
 
-<p align="center">
-<a href="Docs/assets/imgs/diode_CA.png">
-<img src="Docs/assets/imgs/diode_CA.png" alt="Voltammetría Cíclica con vértice 1 mayor a vértice 2." />
+| Variable| Value 
+|:--------------------: |:-------------: 
+|eDC |0.3 V
+|samplingPeriodMs | 10 ms
+|measurementTime | 120 s
+
+
+
+
+<a href="Docs/assets/diode_CA.png">
+<img src="Docs/assets/diode_CA.png" alt="Voltammetría Cíclica con vértice 1 mayor a vértice 2." />
 </a>
-</p>
+
 
 ### Voltammetría Cíclica prueba electroquímica
-Los valores introducidos por el usuario se leen en la siguiente tabla:
+Finalmente, el dispositivo ha sido validado haciendo mediciones con una muestra de ferricianuro de potasio a diferentes concentraciones en un tampón/buffer de cloruro de potasio. Los valores introducidos por el usuario se leen en la siguiente tabla:
 
-Variable| Value 
--------------------- | -------------
-eBegin |0.0 V
-eVertex1 | 0.6 V
-eVertex2 |  -0.6 V
-cycles  |2
-scanRate  |0.01 V/s
-eStep |0.005 V
+|Variable| Value 
+|:--------------------: |:-------------: 
+|eBegin |0.0 V
+|eVertex1 | 0.6 V
+|eVertex2 |  -0.6 V
+|cycles  |2
+|scanRate  |0.01 V/s
+|eStep |0.005 V
+
+Para la concentración de 1mM de tampón:
+
+<a href="Docs/assets/CV1.png">
+<img src="Docs/assets/CV1.png" alt="Voltammetría Cíclica para concentración 1mM." width ="500"/>
+</a>
+
+
+Para la concentración de 5mM de tampón:
+
+<a href="Docs/assets/CV5.png">
+<img src="Docs/assets/CV5.png" alt="Voltammetría Cíclica para concentración 5mM." width ="500"/>
+</a>
 
 ### Cronoamperometría prueba electroquímica
 
 Los valores introducidos por el usuario se leen en la siguiente tabla:
 
-Variable| Value 
--------------------- | -------------
-eDC |0.150 V
-samplingPeriodMs | 20 ms
-measurementTime | 10 s
+|Variable| Value 
+|:--------------------: |:-------------: 
+|eDC |0.150 V
+|samplingPeriodMs | 20 ms
+|measurementTime | 10 s
+
+Para la concentración de 1mM de tampón:
+
+<a href="Docs/assets/CA1.png">
+<img src="Docs/assets/CA1.png" alt="Cronoamperometría para concentración 1mM." width ="500"/>
+</a>
+
+
+Para la concentración de 5mM de tampón:
+
+<a href="Docs/assets/CA5.png">
+<img src="Docs/assets/CA5.png" alt="Cronoamperometría para concentración 5mM." width ="500"/>
+</a>
+
 ## Conclusiones
 
 ## Referencias

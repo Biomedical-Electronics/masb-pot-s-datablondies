@@ -146,7 +146,7 @@ Se ha comprobado que la nueva funcionalidad que permite un valor para el vértic
 </a>
 
 
-A continuación, se muestran los resultados del segundo test. En la siguient imagen podem ver el _setup_. 
+A continuación, se muestran los resultados del segundo test. En la siguient imagen podemos ver el _setup_. 
 
 <p align="center">
 <a href="Docs/assets/TEST2.jpeg">

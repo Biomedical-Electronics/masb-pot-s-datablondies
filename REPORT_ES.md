@@ -117,7 +117,7 @@ A continuación se muestran las operativas tanto de la voltametria cíclica, cro
 
 <p align="center">
 <a href="Docs/assets/CA_testing_castellano.png">
-<img src="Docs/assets/CA_testing_castellano.png" alt="Función CA_testing de la cronoamperometría" width="800"/>
+<img src="Docs/assets/CA_testing_castellano.png" alt="Función CA_testing de la cronoamperometría" width="400"/>
 </a>
 </p>
 

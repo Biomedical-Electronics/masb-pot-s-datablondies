@@ -32,8 +32,8 @@ void setup(struct Handles_S *handles) {
 	hpot = AD5280_Init();
 	AD5280_ConfigSlaveAddress(hpot, 0x2C);
 	AD5280_ConfigNominalResistorValue(hpot, 50e3f);
-	AD5280_ConfigWriteFunction(hpot, I2C_Write); // MIRAR I2C!!
-	AD5280_SetWBResistance(hpot, 50e3f); //definir macro resistencia tia
+	AD5280_ConfigWriteFunction(hpot, I2C_Write);
+	AD5280_SetWBResistance(hpot, 50e3f);
 
 	hdac = MCP4725_Init();
 	MCP4725_ConfigSlaveAddress(hdac, 0x66);
@@ -75,40 +75,38 @@ void loop(void) {
  	}
 
     else{
-    	//si no recibo instruccion
-    	if (estadoIDLE){ //estado = IDLE por lo tanto STOP
+    	if (estadoIDLE){
     		estadoIDLE = FALSE;
-    		true_estadoCycle(hdac); //STOP -> abrir rele + parar timer
+    		true_estadoCycle(hdac);
     		true_counter(hdac);
-    		primeraCV = TRUE; //nueva variable para llamar primera medicion
-    		estadoCV = FALSE; //queremos que despues del STOP la siguiente medida se haga con START
+    		primeraCV = TRUE;
+    		estadoCV = FALSE;
 			estadoCA = FALSE;
 			primeraCA = TRUE;
-    	} else { //estado != IDLE
-			if (estadoCV){ //estado = CV
-				if(primeraCV){ //primera medida CV
+    	} else {
+			if (estadoCV){
+				if(primeraCV){
 					CV_firstMeasure(hdac);
-					primeraCV = FALSE; //variable primera medida FALSE
+					primeraCV = FALSE;
 				} else {
-					if (is_estadoCycle()){ //if para controlar cada medida/punto/sample
-						CV_testing(hdac); //funcion para obtener y enviar punto
-					} else { //hemos completado la medida
-						true_estadoCycle(hdac); //abrir rele + parar timer
+					if (is_estadoCycle()){
+						CV_testing(hdac);
+					} else {
+						true_estadoCycle(hdac);
 						estadoCV = FALSE;
 						primeraCV = TRUE;
 					}
 				}
 			}
-			//lo mismo pero para la CA
 			else if (estadoCA){
 				if(primeraCA){
 					CA_firstSample(hdac);
 					primeraCA = FALSE;
 				}else{
-					if (is_counter()){ //if para seguir con la medicion
+					if (is_counter()){
 						CA_testing(hdac);
-					} else { //en este entra si acabamos la medicion, no si la paramos
-						true_counter(hdac); //abrir rele + parar timer
+					} else {
+						true_counter(hdac);
 						estadoCA = FALSE;
 						primeraCA = TRUE;
 					}

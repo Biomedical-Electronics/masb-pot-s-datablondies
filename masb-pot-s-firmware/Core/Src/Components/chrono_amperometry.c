@@ -19,24 +19,79 @@ static double u2b_m = 8.0/3.3;
 static double u2b_b = 4.0;
 
 void CA_setUart(UART_HandleTypeDef *newHuart) {
+
+	/*
+	 * Function: CA_setUart
+	 * ----------------------------
+	 *   Sets the UART pheripherial for the cronoamperometry
+	 *
+	 *   *newHuart: memory pointer of the UART
+	 *
+	 *   returns: Nothing
+	 */
+
 	huart = newHuart;
 }
 
 void CA_setTimer(TIM_HandleTypeDef *newTimer){
+
+	/*
+	 * Function: CA_setTimer
+	 * ----------------------------
+	 *   Sets the timer pheripherial for the cronoamperometry
+	 *
+	 *   *newTimer: memory pointer of the timer
+	 *
+	 *   returns: Nothing
+	 */
+
+
 	timer = newTimer;
 }
 
 void CA_setADC(ADC_HandleTypeDef *newADC){
+
+	/*
+	 * Function: CA_setADC
+	 * ----------------------------
+	 *   Sets the ADC pheripherial for the cronoamperometry
+	 *
+	 *   *newADC: memory pointer of the ADC
+	 *
+	 *   returns: Nothing
+	 */
+
 	hadc = newADC;
 }
 
 void CA_settingConfiguration(void){
+
+	/*
+	 * Function: CA_settingConfiguration
+	 * ----------------------------
+	 *   Returns the caConfiguration structure with the eDC, samplingPeriodMS
+	 *   measurementTime values
+	 *
+	 *   returns: Nothing
+	 */
+
 	caConfiguration = MASB_COMM_S_getCaConfiguration();
 }
 
 void CA_firstSample(MCP4725_Handle_T hdac){
 
-	//caConfiguration = MASB_COMM_S_getCaConfiguration();
+	/*
+	 * Function: CA_firstSample
+	 * ----------------------------
+	 *  Sets the timer's configuration, opens the relay and fixes the
+	 *  cell's voltage with the DAC. Also it reads the first values
+	 *  of the cronoamperometry measurement.
+	 *
+	 *   MCP4725_Handle_T hdac: DAC pheripherial
+	 *
+	 *   returns: Nothing
+	 */
+
 	TIM_clearEstadoTest();
 	__HAL_TIM_SET_AUTORELOAD(timer, caConfiguration.samplingPeriodMs * 10);
 	__HAL_TIM_SET_COUNTER(timer, 0);
@@ -84,6 +139,18 @@ void CA_firstSample(MCP4725_Handle_T hdac){
 
 void CA_testing(MCP4725_Handle_T hdac){
 
+
+	/*
+	 * Function: CA_testing
+	 * ----------------------------
+	 *   This is the ISR of the timer. At a certain frequency
+	 *   this function reads new V_CELL an I_CELL values.
+	 *
+	 *	MCP4725_Handle_T hdac: DAC pheripherial
+	 *
+	 *   returns: Nothing
+	 */
+
 		if (TIM_isPeriodElapsed()){
 			TIM_clearEstadoTest();
 
@@ -112,13 +179,35 @@ void CA_testing(MCP4725_Handle_T hdac){
 
 }
 
-_Bool is_counter(void) { //nueva funcion
+_Bool is_counter(void) {
+
+	/*
+	 * Function: is_counter
+	 * ----------------------------
+	 *   It returns the boolean when comparing
+	 *   the value of the counter with the
+	 *   measurement time.
+	 *
+	 *
+	 *   returns: Boolean.
+	 */
 
 	return (counter <= measurementTimeMs);
 
 }
 
-void true_counter(MCP4725_Handle_T hdac) { //nueva funcion
+void true_counter(MCP4725_Handle_T hdac) {
+
+	/*
+	 * Function: true_counter
+	 * ----------------------------
+	 *   Stop Command. If the HOST Stop button is pushed,
+	 *   this function stops the measurement reading.
+	 *
+	 *   MCP4725_Handle_T hdac: DAC pheripherial
+	 *
+	 *   returns: the square of the larger of n1 and n2
+	 */
 	HAL_TIM_Base_Stop_IT(timer);
 	HAL_GPIO_WritePin(RELAY_GPIO_Port, RELAY_Pin, GPIO_PIN_RESET);
 }

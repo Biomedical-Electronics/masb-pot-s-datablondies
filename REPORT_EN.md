@@ -250,6 +250,7 @@ The results of the second test are shown below. In the following image we can se
 <img src="Docs/assets/TEST2.jpeg" alt="_Setup_ for the second testing: sensor and board." width = "600"/>
 </a>
 </p>
+
 ### Cyclic Voltammetry: Electrochemical Test
 Finally, the device has been validated by making measurements with a potassium ferricyanide sample at different concentrations in a potassium chloride buffer. 
 The values entered by the user are read in the following table:
@@ -298,6 +299,13 @@ For the 5mM buffer concentration:
 </a>
 
 ## Conclusions
+With the results of the first test we were able to verify the correct operation of the program created to control the microcontroller. Also, we have been able to implement the optional functionalities; the command _stop_ and the case for higher values of vertex 2. On the other hand, when performing the second test we forgot to uncomment a block of code and at the same time comment on another in the file _cyclic_voltammetry.c_, which had been used previously to perform tests at home. For this reason, the cyclic voltammetries are incomplete.
+
+Regarding the _branching policy_, we have been able to follow the guidelines and in an orderly way build the project based on _feature_ branches and _hotfix_ branches that were tested in _develop_. This exercise has helped us to improve our skills using GitHub from the terminal, but also supported by the desktop version of it.
+
+Finally, this project has allowed us to consolidate concepts of electronics that we have been taught theoretically throughout this semester in different subjects, such as microchips. We have been able to assimilate the content of the 8 practices of the microcontrollers course, putting ourselves to the test by having much less guidance.
+
+We have found it very stimulating to work side by side and accept the challenges of the project!
 
 ## References
 1. Y. Montes-Cebrián, A. Álvarez-Carulla, J. Colomer-Farrarons, M. Puig-Vidal, and P. L. Miribel-Català, “Self-powered portable electronic reader for point-of-care amperometric measurements,” Sensors (Switzerland), vol. 19, no. 17, p. 3715, Sep. 2019, doi: 10.3390/s19173715.

@@ -129,7 +129,7 @@ A continuación se muestran las operativas tanto de la voltametria cíclica, cro
 
 <p align="center">
 <a href="Docs/assets/CV_testing_castellano.png">
-<img src="Docs/assets/CV_testing_castellano.png" alt="Función CV_testing de la voltametría" width="400"/>
+<img src="Docs/assets/CV_testing_castellano.png" alt="Función CV_testing de la voltametría" width="1100"/>
 </a>
 </p>
 

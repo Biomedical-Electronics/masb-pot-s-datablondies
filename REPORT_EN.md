@@ -135,7 +135,7 @@ The digital outputs are configured as follows:
 
 And making use of the _HAL_ libraries we control them.
 
-## Code-Operative
+## Code-Operatives
 
 The following diagrams show the operations of the cyclic voltammetry, chronoamperometry and main script of the stm32:
 

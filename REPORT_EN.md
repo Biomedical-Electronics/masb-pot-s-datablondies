@@ -1,4 +1,4 @@
-# Proyecto: Potenciostato
+# Project: Potentiostat
 
 This document details the programming of a portable potentiostat to be able to perform two types of electrochemical measurements: 
 cyclic voltammetry and chronoamperometry. In this project the **control** of a potentiostat has been carried out through a **microcontroller**. 
@@ -7,15 +7,15 @@ so that it can make changes to the system and at the same time view the results.
 
 ## Contents
 
-- [Introduction] (# introduction)
-- [Objectives] (# objectives)
-- [Design] (# design)
-- [Results] (# results)
-     - [Cyclic Voltammetry of Diodes] (# cyclic-voltammetry-of-diodes)
-     - [Diode Chronoamperometry] (# diode-chronoamperometry)
-     - [Cyclic voltammetry of a compound] (# cyclic-voltammetry-test-electrochemistry)
-     - [Chronoamperometry of a compound] (# chronoamperometry-test-electrochemistry)
-- [Conclusions] (# conclusions)
+- [Introduction](#introduction)
+- [Objectives](#objectives)
+- [Design](#design)
+- [Results](#results)
+     - [Cyclic Voltammetry of Diodes](#cyclic-voltammetry-of-diodes)
+     - [Diode Chronoamperometry](#diode-chronoamperometry)
+     - [Cyclic voltammetry of a compound](#cyclic-voltammetry-electrochemical-test)
+     - [Chronoamperometry of a compound](#chronoamperometry-electrochemical-test)
+- [Conclusions](#conclusions)
 
 ## Introduction
 
@@ -42,7 +42,7 @@ The other measure involved in this project is **Chronoamperometry** (CA). In thi
 reaction occurs. And then, the **variation of the response** of the current is measured as a function of **time**.
 
 In order to understand the project, the components of the _e-Reader_ circuit (_PMU_, _Front-End_, Microcontroller and display unit) of the potentiostat will be briefly explained. This explanation
-will be accompanied by a schematic of the _Front-End_ circuit. In this diagram, neither the power supply nor the sensor is detailed, in our case the sensor is a two electrodes. 
+will be accompanied by a schematic of the _Front-End_ circuit. In this diagram, neither the power supply nor the sensor is detailed, in our case the sensor is a three electrodes. 
 As we can see in the following figure the **PMU** extracts power from the source and converts it into the control and voltage supply signals. At the same time the 
 **_Front-end_** get the measurements. The output voltage of the _Front-end_ is processed by the **microcontroller** and is sent to the **LabView _viSens-S_** interface, 
 on our computers.
@@ -145,6 +145,14 @@ Two tests have been carried out in different sessions. In the first, the system 
 </a>
 </p>
 
+In the following image, you can see the _setup_ of the day of the first test:
+
+<p align="center">
+<a href="Docs/assets/TEST1.jpeg">
+<img src="Docs/assets/TEST1.jpeg" alt="_Setup_ for the first testing session: Diodes." width = "500"/>
+</a>
+</p>
+
 ### Cyclic Voltammetry of Diodes
 The values entered by the user are read in the following table:
 
@@ -161,6 +169,7 @@ The values entered by the user are read in the following table:
 <img src="Docs/assets/diode_CV_1.png" alt="Cyclic voltammetry with vertex 1 greater than vertex 2." />
 </a>
 
+The new functionality that allows a value for vertex 2 greater than that of vertex 1 has been found to work.
 
 <a href="Docs/assets/diode_CV_2.png">
 <img src="Docs/assets/diode_CV_2.png" alt="Cyclic voltammetry with vertex 2 greater than vertex 1." />
@@ -181,6 +190,13 @@ The values entered by the user are read in the following table:
 <img src="Docs/assets/diode_CA.png" alt="Voltammetría Cíclica con vértice 1 mayor a vértice 2." />
 </a>
 
+
+The results of the second test are shown below. In the following image we can see the _setup_.
+<p align="center">
+<a href="Docs/assets/TEST2.jpeg">
+<img src="Docs/assets/TEST2.jpeg" alt="_Setup_ for the second testing: sensor and board." width = "600"/>
+</a>
+</p>
 ### Cyclic Voltammetry: Electrochemical Test
 Finally, the device has been validated by making measurements with a potassium ferricyanide sample at different concentrations in a potassium chloride buffer. 
 The values entered by the user are read in the following table:
@@ -207,7 +223,7 @@ For the 5mM buffer concentration:
 <img src="Docs/assets/CV5.png" alt="Cyclic Voltammetry for 5mM concentration." width ="500"/>
 </a>
 
-### Chronoamperometry electrochemical test
+### Chronoamperometry: Electrochemical Test
 
 The values entered by the user are read in the following table:
 |Variable| Value 

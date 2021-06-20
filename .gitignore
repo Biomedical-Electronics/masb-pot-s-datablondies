@@ -1,0 +1,15 @@
+# Project stuff
+*.launch
+.settings/
+Debug/
+Drivers/
+
+# Object files
+*.o
+
+# OS stuff
+.DS_Store
+
+# VSC
+.vscode/
+

@@ -111,37 +111,37 @@ A continuación se muestran las operativas tanto de la voltametria cíclica, cro
 
 <p align="center">
 <a href="Docs/assets/CA_firstMeasure.png">
-<img src="Docs/assets/CA_firstMeasure.png" alt="Función CA_firstMeasure de la cronoamperometría" width="400"/>
+<img src="Docs/assets/CA_firstMeasure.png" alt="Función CA_firstMeasure de la cronoamperometría" width="100"/>
 </a>
 </p>
 
 <p align="center">
 <a href="Docs/assets/CA_testing_castellano.png">
-<img src="Docs/assets/CA_testing_castellano.png" alt="Función CA_testing de la cronoamperometría" width="400"/>
+<img src="Docs/assets/CA_testing_castellano.png" alt="Función CA_testing de la cronoamperometría" width="100"/>
 </a>
 </p>
 
 <p align="center">
 <a href="Docs/assets/CV_firstMeasure_castellano.png">
-<img src="Docs/assets/CV_firstMeasure_castellano.png" alt="Función CV_firstMeasure de la voltametría" width="400"/>
+<img src="Docs/assets/CV_firstMeasure_castellano.png" alt="Función CV_firstMeasure de la voltametría" width="800"/>
 </a>
 </p>
 
 <p align="center">
 <a href="Docs/assets/CV_testing_castellano.png">
-<img src="Docs/assets/CV_testing_castellano.png" alt="Función CV_testing de la voltametría" width="400"/>
+<img src="Docs/assets/CV_testing_castellano.png" alt="Función CV_testing de la voltametría" width="800"/>
 </a>
 </p>
 
 <p align="center">
 <a href="Docs/assets/setup_caastellano.png">
-<img src="Docs/assets/setup_caastellano.png" alt="Función setup del archivo stm32.main" width="400"/>
+<img src="Docs/assets/setup_caastellano.png" alt="Función setup del archivo stm32.main" width="800"/>
 </a>
 </p>
 
 <p align="center">
 <a href="Docs/assets/loop_castellano.png">
-<img src="Docs/assets/loop_castellano.png" alt="Función loop del archivo stm32.main" width="400"/>
+<img src="Docs/assets/loop_castellano.png" alt="Función loop del archivo stm32.main" width="800"/>
 </a>
 </p>
 

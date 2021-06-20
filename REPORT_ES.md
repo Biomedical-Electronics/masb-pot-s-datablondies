@@ -29,7 +29,7 @@ Una de estas medidas electroquímicas es la **Voltammetria Cíclica** (CV), un t
 
 La otra medida tratada en este proyecto es la **Cronoamperometría** (CA). En esta se aplica un **señal escalón**, elevando el valor del potencial a una tal que ocurre una reacción redox. Y entonces, se mide la **variación de la respuesta** de la corriente en función del **tiempo**. 
 
-Con tal de entender el proyecto, se darán cuatro pinceladas de los compomentes del circuito _e-Reader_ (_PMU_, _Front-End_, Microcontrolador y unidad de visualización) del potenciostato que se acompañaran con un esquema del circuito _Front-End_. En este esquema no se detalla ni la fuente de alimentación ni el sensor, en nuestro caso uno de dos electrodos. Como podemos contemplar en la siguiente figura la **PMU** extrae alimentación de la fuente y la convierte en los señales de control y de suministro de voltaje. Al mismo tiempo el **_Front-end_** obtienen las medidas. El voltage de salida del _Front-end_ es procesador por el **microcontrolador** y se envia a la interfície de **LabView _viSens-S_**, en nuestros ordenadores. 
+Con tal de entender el proyecto, se darán cuatro pinceladas de los compomentes del circuito _e-Reader_ (_PMU_, _Front-End_, Microcontrolador y unidad de visualización) del potenciostato que se acompañaran con un esquema del circuito _Front-End_. En este esquema no se detalla ni la fuente de alimentación ni el sensor, en nuestro caso uno de tres electrodos. Como podemos contemplar en la siguiente figura la **PMU** extrae alimentación de la fuente y la convierte en los señales de control y de suministro de voltaje. Al mismo tiempo el **_Front-end_** obtienen las medidas. El voltage de salida del _Front-end_ es procesador por el **microcontrolador** y se envia a la interfície de **LabView _viSens-S_**, en nuestros ordenadores. 
 
 El _Front-end_ se encarga de estabilizar la diferencia de voltaje entre los electrodos de la celda electroquímica y leer/procesar la señal de salida. El voltage de regulación (V<sub>LDO</sub>) alimenta los componentes analógicos del _Front-end_. Tal y como vemos en el circuito, el primer amplificador es un Op-Amp que se usa como control. Este proporciona al sensor el V<sub>IN</sub>, ajustado con un divisor de tensión (R1 y R2). También nos encontramos con un amplificador búfer. Este lo utilizamos para aislar. El V<sub>OCV</sub> es controlado por el ADC del microcontrolador y aplicado a CE (en la celda) como referencia. En el momento de tomar la muestra el relé (Switch) se cierra. Y el TIA (amplificador de transimpedancia) genera la señal de salida, através de la R<sub>TIA</sub>, que es proporcional a la corriente en la celda[1]. 
 <p align="center">
@@ -116,6 +116,12 @@ En total se han realizado dos pruebas en diferentes sesiones. En la primera, se 
 </a>
 </p>
 
+En la siguiente imagen, se puede observar el _setup_ del día de la primera prueba:
+<p align="center">
+<a href="Docs/assets/TEST1.jpeg">
+<img src="Docs/assets/TEST1.jpeg" alt="_Setup_ para el primer testing: Díodos." width = "500"/>
+</a>
+</p>
 
 ### Voltammetría Cíclica de Díodos
 Los valores introducidos por el usuario se leen en la siguiente tabla:
@@ -134,11 +140,19 @@ Los valores introducidos por el usuario se leen en la siguiente tabla:
 <img src="Docs/assets/diode_CV_1.png" alt="Voltammetría Cíclica con vértice 1 mayor a vértice 2." />
 </a>
 
-
+Se ha comprobado que la nueva funcionalidad que permite un valor para el vértice 2 mayor al del vértice 1 funciona. 
 <a href="Docs/assets/diode_CV_2.png">
 <img src="Docs/assets/diode_CV_2.png" alt="Voltammetría Cíclica con vértice 2 mayor a vértice 1." />
 </a>
 
+
+A continuación, se muestran los resultados del segundo test. En la siguient imagen podem ver el _setup_. 
+
+<p align="center">
+<a href="Docs/assets/TEST2.jpeg">
+<img src="Docs/assets/TEST2.jpeg" alt="_Setup_ para el segundo testing: sensor y placa." width = "600"/>
+</a>
+</p>
 
 ### Cronoamperometría de Díodos
 

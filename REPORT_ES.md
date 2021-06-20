@@ -273,6 +273,13 @@ Para la concentración de 5mM de tampón:
 </a>
 
 ## Conclusiones
+Con los resultados del primer test pudimos verificar el correcto funcionamiento del programa creado para controlar el microcontrolador. También, hemos sido capaces de implementar las funcionalidades opcionales; el comando de _stop_ y el caso para valores superiores de vértice 2. Por otra parte, al realizar el segundo test olvidamos descomentar un bloque de código y al mismo tiempo comentar otro en el fichero _cyclic_voltammetry.c_, que se habían utilizado con anterioridad para realizar pruebas en casa. Por este motivo, las voltametrías cíclicas salen incompletas.
+
+Respecto a la _branching policy_, hemos sido capaces de seguir las directrices y de forma ordenada construir el proyecto a base de ramas _feature_ y ramas _hotfix_ que eran testeadas en _develop_. Este ejercicio nos ha servido para mejorar nuestras aptitudes usando GitHub desde terminal, pero también apoyadas por la versión de escritorio del mismo.
+
+Por último, este proyecto nos ha permitido consolidar muchos conocimientos de electrónica que se nos han impartido de forma teórica a lo largo de este semestre en diferentes asignaturas, como microchips. Hemos podido asimilar el contenido de las 8 prácticas de la asignatura de microcontroladores, poniéndonos a prueba al tener mucha menos guía.
+
+¡Nos ha resultado muy estimulante trabajar codo con codo y aceptar los retos del proyecto!
 
 ## Referencias
 1. Y. Montes-Cebrián, A. Álvarez-Carulla, J. Colomer-Farrarons, M. Puig-Vidal, and P. L. Miribel-Català, “Self-powered portable electronic reader for point-of-care amperometric measurements,” Sensors (Switzerland), vol. 19, no. 17, p. 3715, Sep. 2019, doi: 10.3390/s19173715.

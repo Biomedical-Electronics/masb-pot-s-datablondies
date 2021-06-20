@@ -1,6 +1,6 @@
 # Proyecto: Potenciostato
 
-En el presente documento se detalla la programación de un potenciostato portable para poder realizar dos tipos de mediciones electroquímicas: voltammetría cíclica y cronoamperometría. 
+En el presente documento se detalla la programación de un potenciostato portable para poder realizar dos tipos de mediciones electroquímicas: voltammetría cíclica y cronoamperometría. En este proyecto se ha realizado el **control** de un potenciostato a través de un **microcontrolador**. El microcontrolador es una herramienta muy útil que nos va a permitir connectar el potenciostato a un **ordenador** que actuará como interficie de usuario para que este pueda hacer cambios en el sistema y a la vez visualice los resultados. Los objetivos específicos se describen en la siguiente sección. 
 
 ## Contenidos
 
@@ -31,17 +31,12 @@ La otra medida tratada en este proyecto es la **Cronoamperometría** (CA). En es
 
 Con tal de entender el proyecto, se darán cuatro pinceladas de los compomentes del circuito _e-Reader_ (_PMU_, _Front-End_, Microcontrolador y unidad de visualización) del potenciostato que se acompañaran con un esquema del circuito _Front-End_. En este esquema no se detalla ni la fuente de alimentación ni el sensor, en nuestro caso uno de dos electrodos. Como podemos contemplar en la siguiente figura la **PMU** extrae alimentación de la fuente y la convierte en los señales de control y de suministro de voltaje. Al mismo tiempo el **_Front-end_** obtienen las medidas. El voltage de salida del _Front-end_ es procesador por el **microcontrolador** y se envia a la interfície de **LabView _viSens-S_**, en nuestros ordenadores. 
 
-El _Front-end_ se encarga de estabilizar la diferencia de voltaje entre los electrodos de la celda electroquímica y leer/procesar la señal de salida. El voltage de regulación (V<sub>LDO</sub>) alimenta los componentes analógicos del _Front-end_. Tal y como vemos en el circuito, el primer amplificador es un Op-Amp que se usa como control. Este proporciona al sensor el V<sub>IN</sub>, ajustado con un divisor de tensión (R1 y R2). También nos encontramos con un amplificador búfer. Este lo utilizamos para aislar. El V<sub>OCV</sub> es controlado por el ADC del microcontrolador y aplicado a CE (en la celda) como referencia. En el momento de tomar la muestra el relé (Switch) se cierra. Y el TIA (amplificador de transimpedancia) genera la señal de salida, através de la R<sub>TIA</sub>, que es proporcional a la corriente en la celda. 
-
-https://www.mdpi.com/1424-8220/19/17/3715/htm
+El _Front-end_ se encarga de estabilizar la diferencia de voltaje entre los electrodos de la celda electroquímica y leer/procesar la señal de salida. El voltage de regulación (V<sub>LDO</sub>) alimenta los componentes analógicos del _Front-end_. Tal y como vemos en el circuito, el primer amplificador es un Op-Amp que se usa como control. Este proporciona al sensor el V<sub>IN</sub>, ajustado con un divisor de tensión (R1 y R2). También nos encontramos con un amplificador búfer. Este lo utilizamos para aislar. El V<sub>OCV</sub> es controlado por el ADC del microcontrolador y aplicado a CE (en la celda) como referencia. En el momento de tomar la muestra el relé (Switch) se cierra. Y el TIA (amplificador de transimpedancia) genera la señal de salida, através de la R<sub>TIA</sub>, que es proporcional a la corriente en la celda[1]. 
 <p align="center">
 <a href="Docs/assets/imgs/front_end.png">
 <img src="Docs/assets/imgs/front_end.png" alt="Block diagram del _e-Reader_." />
 </a>
 </p>
-
-
-En este proyecto se ha realizado el **control** de un potenciostato a través de un **microcontrolador**. El microcontrolador es una herramienta muy útil que nos va a permitir connectar el potenciostato a un **ordenador** que actuará como interficie de usuario para que este pueda hacer cambios en el sistema y a la vez visualice los resultados. Los objetivos específicos se describen en la siguiente sección. 
 
 ## Objetivos
 
@@ -184,3 +179,6 @@ eDC |0.150 V
 samplingPeriodMs | 20 ms
 measurementTime | 10 s
 ## Conclusiones
+
+## Referencias
+1. Y. Montes-Cebrián, A. Álvarez-Carulla, J. Colomer-Farrarons, M. Puig-Vidal, and P. L. Miribel-Català, “Self-powered portable electronic reader for point-of-care amperometric measurements,” Sensors (Switzerland), vol. 19, no. 17, p. 3715, Sep. 2019, doi: 10.3390/s19173715.

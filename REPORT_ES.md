@@ -105,6 +105,45 @@ Las salidas digitales se configuran así:
 
 Y haciendo uso de las librerías _HAL_ las controlamos. 
 
+## Operativas del proyecto
+
+A continuación se muestran las operativas tanto de la voltametria cíclica, cronoamperometría y main del stm32:
+
+<p align="center">
+<a href="Docs/assets/CA_firstMeasure.png">
+<img src="Docs/assets/CA_firstMeasure.png" alt="Función CA_firstMeasure de la cronoamperometría" width="400"/>
+</a>
+</p>
+
+<p align="center">
+<a href="Docs/assets/CA_testing_castellano.png">
+<img src="Docs/assets/CA_testing_castellano.png" alt="Función CA_testing de la cronoamperometría" width="400"/>
+</a>
+</p>
+
+<p align="center">
+<a href="Docs/assets/CV_firstMeasure_castellano.png">
+<img src="Docs/assets/CV_firstMeasure_castellano.png" alt="Función CV_firstMeasure de la voltametría" width="400"/>
+</a>
+</p>
+
+<p align="center">
+<a href="Docs/assets/CV_testing_castellano.png">
+<img src="Docs/assets/CV_testing_castellano.png" alt="Función CV_testing de la voltametría" width="400"/>
+</a>
+</p>
+
+<p align="center">
+<a href="Docs/assets/setup_caastellano.png">
+<img src="Docs/assets/setup_caastellano.png" alt="Función setup del archivo stm32.main" width="400"/>
+</a>
+</p>
+
+<p align="center">
+<a href="Docs/assets/loop_castellano.png">
+<img src="Docs/assets/loop_castellano.png" alt="Función loop del archivo stm32.main" width="400"/>
+</a>
+</p>
 
 ## Resultados
 

@@ -111,7 +111,7 @@ A continuación se muestran las operativas tanto de la voltametria cíclica, cro
 
 <p align="center">
 <a href="Docs/assets/CA_firstMeasure.png">
-<img src="Docs/assets/CA_firstMeasure.png" alt="Función CA_firstMeasure de la cronoamperometría" width="400"/>
+<img src="Docs/assets/CA_firstMeasure.png" alt="Función CA_firstMeasure de la cronoamperometría" width="200"/>
 </a>
 </p>
 

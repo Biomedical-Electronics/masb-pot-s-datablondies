@@ -111,13 +111,13 @@ A continuación se muestran las operativas tanto de la voltametria cíclica, cro
 
 <p align="center">
 <a href="Docs/assets/CA_firstMeasure.png">
-<img src="Docs/assets/CA_firstMeasure.png" alt="Función CA_firstMeasure de la cronoamperometría" width="200"/>
+<img src="Docs/assets/CA_firstMeasure.png" alt="Función CA_firstMeasure de la cronoamperometría" width="800"/>
 </a>
 </p>
 
 <p align="center">
 <a href="Docs/assets/CA_testing_castellano.png">
-<img src="Docs/assets/CA_testing_castellano.png" alt="Función CA_testing de la cronoamperometría" width="300"/>
+<img src="Docs/assets/CA_testing_castellano.png" alt="Función CA_testing de la cronoamperometría" width="800"/>
 </a>
 </p>
 

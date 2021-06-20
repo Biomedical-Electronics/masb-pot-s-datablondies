@@ -5,7 +5,7 @@
 #define __I2C_LIB_H
 
 // Comentar esta linea cuando se tenga la placa disponible.
-#define I2C_DEBUG
+//#define I2C_DEBUG
 
 /**
   * @brief  Inicaliza la libreria obteniendo un puntero al handle de I2C.

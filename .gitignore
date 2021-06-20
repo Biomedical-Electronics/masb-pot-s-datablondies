@@ -1,8 +1,4 @@
-
 # Project stuff
-.cproject
-.mxproject
-.project
 *.launch
 .settings/
 Debug/
@@ -16,3 +12,4 @@ Drivers/
 
 # VSC
 .vscode/
+

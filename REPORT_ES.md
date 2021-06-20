@@ -135,7 +135,7 @@ A continuación se muestran las operativas tanto de la voltametria cíclica, cro
 
 <p align="center">
 <a href="Docs/assets/setup_caastellano.png">
-<img src="Docs/assets/setup_caastellano.png" alt="Función setup del archivo stm32.main" width="1000"/>
+<img src="Docs/assets/setup_caastellano.png" alt="Función setup del archivo stm32.main" width="100"/>
 </a>
 </p>
 

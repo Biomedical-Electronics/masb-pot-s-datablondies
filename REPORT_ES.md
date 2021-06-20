@@ -129,19 +129,19 @@ A continuación se muestran las operativas tanto de la voltametria cíclica, cro
 
 <p align="center">
 <a href="Docs/assets/CV_testing_castellano.png">
-<img src="Docs/assets/CV_testing_castellano.png" alt="Función CV_testing de la voltametría" width="800"/>
+<img src="Docs/assets/CV_testing_castellano.png" alt="Función CV_testing de la voltametría" width="400"/>
 </a>
 </p>
 
 <p align="center">
 <a href="Docs/assets/setup_caastellano.png">
-<img src="Docs/assets/setup_caastellano.png" alt="Función setup del archivo stm32.main" width="100"/>
+<img src="Docs/assets/setup_caastellano.png" alt="Función setup del archivo stm32.main" width="1100"/>
 </a>
 </p>
 
 <p align="center">
 <a href="Docs/assets/loop_castellano.png">
-<img src="Docs/assets/loop_castellano.png" alt="Función loop del archivo stm32.main" width="1000"/>
+<img src="Docs/assets/loop_castellano.png" alt="Función loop del archivo stm32.main" width="1100"/>
 </a>
 </p>
 
